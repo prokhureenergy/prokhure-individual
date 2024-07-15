@@ -1,3 +1,5 @@
+import { Plus, Trash3 } from "react-bootstrap-icons";
+import mastercard from "../../assets/images/Mastercard.png";
 export const Profile = () => {
   return (
     <>
@@ -58,7 +60,23 @@ export const Profile = () => {
             <p className="text-xs py-1">Update your payment details</p>
           </div>
           <div className="flex items-center justify-center shadow-md rounded-md px-3 font-semibold border border-slate-200">
-            Add card
+            <div className="">
+              <Plus size={25} />
+            </div>
+            <p className="px-1">Add card </p>
+          </div>
+        </div>
+        <div className="flex justify-between border border-slate-200 rounded-md shadow-sm p-3 mt-6 mb-2">
+          <div className="flex">
+              <img src={mastercard} alt="card" className="w-[40px] h-[30px]" />
+            <div className="px-2">
+              <p className="font-semibold">Joshua Grisham</p>
+              <p> ****************2234</p>
+            </div>
+          </div>
+          <div className="flex justify-stretch">
+            {" "}
+            <Trash3 className="flex justify-start items-start" />
           </div>
         </div>
       </div>
