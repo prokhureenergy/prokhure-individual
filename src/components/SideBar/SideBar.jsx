@@ -13,7 +13,7 @@ export const SidebarList = [
   { title: "Subscription", icon: <Person /> },
   { title: "Category & Pricing", icon: <Person /> },
   { title: "Wishlist", icon: <Heart /> },
-  { title: "Purchase & History", icon: <Person /> },
+  { title: "Purchase History", icon: <Person /> },
   { title: "Messages", icon: <Person /> },
   { title: "Support", icon: <Headphones /> },
   { title: "Signout", icon: <Power /> },

@@ -2,14 +2,14 @@ import { useState } from "react";
 import { NavBar } from "../../components/Shared/NavBar";
 import {
   ActiveItem,
-  InactiveItem,
-  SideBar,
 } from "../../components/SideBar/SideBar";
 import { Support } from "../Support/Support";
 import { Account } from "../Account/Account";
 import { Category } from "../Category/Category";
 import { SidebarList } from "../../components/SideBar/SideBar";
 import { Search } from "react-bootstrap-icons";
+import { Wishlist } from "../Wishlist/Wishlist";
+import { PurchaseHistory } from "../Order/PurchaseHistory";
 
 export const Dashboard = () => {
   const [active, setActive] = useState("Account");
@@ -71,6 +71,8 @@ export const Dashboard = () => {
             {active === "Account" && <Account />}
             {active === "Category & Pricing" && <Category />}
             {active === "Support" && <Support />}
+            {active === "Wishlist" && <Wishlist/>}
+            {active=== "Purchase History" && <PurchaseHistory/>}
           </div>
         </div>
       </div>
