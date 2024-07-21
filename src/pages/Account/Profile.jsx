@@ -10,7 +10,7 @@ export const Profile = () => {
             <p className="text-xs py-1">Update your account details</p>
           </div>
           <div className="flex items-center justify-center shadow-md rounded-md px-3 font-semibold border border-slate-200">
-            Edit account
+            Change password
           </div>
         </div>
         <div className="my-6 text-base">

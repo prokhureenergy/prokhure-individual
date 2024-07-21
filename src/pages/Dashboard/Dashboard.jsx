@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { NavBar } from "../../components/Shared/NavBar";
+import { Messages } from "../Messages/Messages";
+
 import {
   ActiveItem,
 } from "../../components/SideBar/SideBar";
@@ -31,7 +33,7 @@ export const Dashboard = () => {
                     <input
                       type="search"
                       name="searchParam"
-                      className="w-full py-1 px-4 text-gray-800 mx-5 focus:outline-none"
+                      className="w-full py-1 px-4 text-gray-800 ml-5 focus:outline-none"
                       placeholder="Search..."
                     />
                   </form>
@@ -67,12 +69,13 @@ export const Dashboard = () => {
               </div>
             </>
           </div>
-          <div className="mx-8 px-4 w-[600px]">
+          <div className={`mx-8 px-4 ${active === "Messages" || active ==="Purchase History" ? "w-[750px]" : "w-[550px]"}`}>
             {active === "Account" && <Account />}
             {active === "Category & Pricing" && <Category />}
             {active === "Support" && <Support />}
             {active === "Wishlist" && <Wishlist/>}
             {active=== "Purchase History" && <PurchaseHistory/>}
+            {active ==="Messages" && <Messages/> }
           </div>
         </div>
       </div>
