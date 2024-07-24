@@ -60,9 +60,9 @@ export const PurchaseHistory = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-3"></div>
-            <div className="col-span-2">
-              <div className="flex">
+            <div className="col-span-2"></div>
+            <div className="col-span-3">
+              <div className="flex justify-end">
                 <div className="my-1 mx-2 h-[20px] text-xs flex items-center justify-center">
                   <form className="flex rounded-md bg-white border border-gray-200 shadow-sm">
                     <Search
@@ -73,7 +73,7 @@ export const PurchaseHistory = () => {
                       type="search"
                       name="searchParam"
                       className="w-full py-1.5 px-2 text-slate-400 ml-5 focus:outline-none"
-                      placeholder="Search..."
+                      placeholder="Search for orders"
                     />
                   </form>
                 </div>
@@ -108,7 +108,7 @@ export const PurchaseHistory = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="max-w-full">
             <OrderTable />
           </div>
         </div>

@@ -53,8 +53,8 @@ export const Messages = () => {
                   {count}{" "}
                 </div>
               </div>
-              <div className="">
-                <div className="my-4 mx-2 h-[20px] text-xs flex items-center justify-center">
+              <div>
+                <div className="my-4 mx-2 h-[20px] text-xs">
                   <form className="flex rounded-md bg-white border border-gray-200 shadow-sm">
                     <Search
                       className="absolute h-3 w-3 flex ml-2 my-2"
