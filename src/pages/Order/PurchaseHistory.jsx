@@ -4,7 +4,7 @@ import { Search, ChevronDown } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 export const PurchaseHistory = () => {
-  const [status, setStatus] = useState("Delivered");
+  const [status, setStatus] = useState("All");
   const toggleDropdown = (e) => {
     var elem = document.querySelector("#sortDropdownButton #sortDropdown");
     elem.classList.toggle("hidden");
@@ -45,14 +45,14 @@ export const PurchaseHistory = () => {
                     Ongoing
                   </button>
                 </div>
-                <div className="group-hover:bg-white">
+                <div className="group">
                   {" "}
                   <button
                     onClick={() => setStatus("Delivered")}
                     className={`px-5 ${
                       status === "Delivered"
                         ? "py-0.5 bg-white rounded-sm font-medium"
-                        : "font-medium text-slate-400"
+                        : "font-medium text-slate-400 group-hover:bg-whiteA"
                     }`}
                   >
                     Delivered
