@@ -12,7 +12,7 @@ export const NavBar = () => {
 
   return (
     <>
-      <nav className="bg-white shadow-md p-2">
+      <nav className="shadow-md p-2">
         <div className="flex justify-between">
           <div className="p-2 flex items-center justify-center">
             <img src={logo} alt="logo" />
@@ -24,8 +24,8 @@ export const NavBar = () => {
           {user === null ? (
             <>
               <div className="flex items-center justify-center text-slate-700">
-                <p className="mx-2">Need help?</p>
-                <div className="font-semibold border border-gray-200 shadow-sm rounded-md pr-2 py-2 mx-2 flex">
+                {/* <p className="mx-2">Need help?</p> */}
+                <div className="font-semibold bg-white border border-gray-200 shadow-sm rounded-md pr-2 py-2 mx-2 flex">
                   <div className="py-1 px-2"><Headphones/></div>
                   <p>Contact us</p>
                 </div>

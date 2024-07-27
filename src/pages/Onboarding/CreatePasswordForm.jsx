@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   CheckCircleFill,
-  ExclamationCircleFill,
+  X,
   XCircleFill,
 } from "react-bootstrap-icons";
 export const CreatePasswordForm = () => {
@@ -157,7 +157,11 @@ export const CreatePasswordForm = () => {
             <p className="py-1 font-light">Welcome to Prokhure Marketplace. A verification email has been sent to willie.jennings@example.com</p>
             <p className="font-semibold underline">Check your mail</p>
             </div>
-            
+            <div className="text-slate-500">
+              <button>
+              <X/>
+                </button>  
+            </div>
         </div>
       </div>
     </>

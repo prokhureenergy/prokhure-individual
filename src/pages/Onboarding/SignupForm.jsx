@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { ExclamationCircleFill } from "react-bootstrap-icons";
 export const SignupForm = () => {
-  const [loginPayload, setLoginPayload] =useState({
+  const [signupPayload, setSignupPayload] =useState({
     firstName: "",
     lastName: "",
     emailAddress: "",
   });
 
   const handleChange =(e)=>{
-    setLoginPayload({...loginPayload, [e.target.name]: e.target.value})
+    setSignupPayload({...signupPayload, [e.target.name]: e.target.value})
   }
  
   return (
@@ -21,7 +21,7 @@ export const SignupForm = () => {
               type="text"
               placeholder="E.g Johnson"
               name="firstName"
-              value={loginPayload.firstName}
+              value={signupPayload.firstName}
               onChange={handleChange}
               className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
             ></input>
@@ -32,7 +32,7 @@ export const SignupForm = () => {
               type="text"
               placeholder="E.g Grisham"
               name="lastName"
-              value={loginPayload.lastName}
+              value={signupPayload.lastName}
               onChange={handleChange}
               className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
             ></input>
@@ -44,7 +44,7 @@ export const SignupForm = () => {
               type="email"
               placeholder="E.g hello@prokhure.com"
               name="emailAddress"
-              value={loginPayload.emailAddress}
+              value={signupPayload.emailAddress}
               onChange={handleChange}
               className="peer border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8 invalid:border-red-600"
             ></input>
@@ -59,7 +59,7 @@ export const SignupForm = () => {
 
           <button
             className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
-            disabled={!loginPayload.emailAddress}
+            disabled={!signupPayload.emailAddress}
           >
             Confirm Details
           </button>

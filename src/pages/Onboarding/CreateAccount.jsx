@@ -8,7 +8,7 @@ import { VerificationForm } from "./VerificationForm";
 
 export const CreateAccount = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isCreateAccountSuccessful, setIsCreateAccountSuccusful] =
+  const [isCreateAccountSuccessful, setIsCreateAccountSuccessful] =
     useState(true);
   let pageHeader;
   let pageForm;
@@ -42,8 +42,10 @@ export const CreateAccount = () => {
   }
   return (
     <>
+    <div className="max-h-screen">
       <NavBar />
-      <div className="flex max-h-dvh">
+      
+      <div className="flex">
         <div className="basis-7/12">
           <div className="flex justify-center items-center mt-14 pt-8">
             <div>
@@ -65,6 +67,7 @@ export const CreateAccount = () => {
               </div>
             </div>
           </div>
+
         </div>
 
         <div className="basis-5/12 bg-slate-50">
@@ -72,6 +75,7 @@ export const CreateAccount = () => {
         </div>
       </div>
       <p className="text-xs px-4 py-2">© 2024 Prokhure Energy</p>
+      </div>
     </>
   );
 };
