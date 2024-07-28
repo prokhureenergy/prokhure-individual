@@ -1,16 +1,28 @@
 import { useState } from "react";
-import { ExclamationCircleFill } from "react-bootstrap-icons";
+import {
+  ExclamationCircleFill,
+  UniversalAccessCircle,
+} from "react-bootstrap-icons";
+import { useRegisterUserMutation } from "../../redux/user/userApi";
+
 export const SignupForm = () => {
-  const [signupPayload, setSignupPayload] =useState({
+  const [signupPayload, setSignupPayload] = useState({
     firstName: "",
     lastName: "",
     emailAddress: "",
   });
 
-  const handleChange =(e)=>{
-    setSignupPayload({...signupPayload, [e.target.name]: e.target.value})
-  }
- 
+  const handleChange = (e) => {
+    setSignupPayload({ ...signupPayload, [e.target.name]: e.target.value });
+  };
+  const [registerUser, { data, error, isLoading, isError }] =
+    useRegisterUserMutation();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    registerUser(signupPayload);
+  };
+  console.log(data);
+
   return (
     <>
       <div className="mt-3 text-xs w-[300px]">

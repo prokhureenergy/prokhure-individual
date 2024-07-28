@@ -141,7 +141,7 @@ export const CreatePasswordForm = () => {
           <button
             className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
             disabled={
-              !passwordPayload.password || !passwordPayload.confirmPassword
+              passwordStrength !== 3 || !passwordPayload.confirmPassword
             }
           >
             Create Password
