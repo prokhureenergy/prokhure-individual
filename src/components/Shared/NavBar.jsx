@@ -1,5 +1,5 @@
 import logo from "../../assets/icon/Prokhure.png";
-import { Cart, Bell, ChevronDown, Headphones, X } from "react-bootstrap-icons";
+import { Cart, Bell, ChevronDown, Headphones } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 export const NavBar = () => {
@@ -29,7 +29,6 @@ export const NavBar = () => {
                   <div className="py-1 px-2"><Headphones/></div>
                   <p>Contact us</p>
                 </div>
-                <div className="mx-2"><X/></div>
               </div>
             </>
           ) : (

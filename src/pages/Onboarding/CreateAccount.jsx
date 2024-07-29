@@ -5,15 +5,18 @@ import { SignupForm } from "./SignupForm";
 import { useState } from "react";
 import { CreatePasswordForm } from "./CreatePasswordForm";
 import { VerificationForm } from "./VerificationForm";
+import { useSelector } from "react-redux";
 
 export const CreateAccount = () => {
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isCreateAccountSuccessful, setIsCreateAccountSuccessful] =
-    useState(true);
+  const regPayload = useSelector((state) => state.userState?.registerPayload);
+  console.log(regPayload);
+  const isAccountCreated = useSelector((state)=> state.userState?.createAccount);
+  console.log(isAccountCreated);
+    
   let pageHeader;
   let pageForm;
 
-  if (isEmailValid) {
+  if (regPayload !== null) {
     pageHeader = (
       <>
         <p className="font-semibold">Create your Password</p>
@@ -23,7 +26,7 @@ export const CreateAccount = () => {
       </>
     );
     pageForm = <CreatePasswordForm />;
-  } else if (isCreateAccountSuccessful) {
+  } else if (isAccountCreated) {
     pageHeader =  <>
     <p className="font-semibold">Enter Verification Code</p>
     <p className="font-normal text-xs pb-5">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavBar } from "../../components/Shared/NavBar";
 import { Messages } from "../Messages/Messages";
-
+import { useSelector } from "react-redux";
 import {
   ActiveItem,
 } from "../../components/SideBar/SideBar";
@@ -14,13 +14,15 @@ import { Wishlist } from "../Wishlist/Wishlist";
 import { PurchaseHistory } from "../Order/PurchaseHistory";
 
 export const Dashboard = () => {
+  const userData = useSelector((state) => state.userState.user?.userDetail);
+console.log(userData);
   const [active, setActive] = useState("Account");
 
   return (
     <>
-      <div className="bg-slate-50 w-dvw min-h-dvh">
+      <div className="bg-slate-50 w-dvw min-h-screen">
         <NavBar />
-        <div className="grid grid-cols-7 gap-8 mx-32 mt-32">
+        <div className="grid grid-cols-7 gap-8 mx-32 mt-20">
           <div className="col-span-2 w-[300px]">
             <>
               <div className="bg-white border border-slate-200 rounded-lg">

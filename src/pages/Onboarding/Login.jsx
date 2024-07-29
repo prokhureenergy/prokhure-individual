@@ -1,19 +1,47 @@
 import { NavBar } from "../../components/Shared/NavBar";
 import CustomIcon from "../../assets/images/Custom Icon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ExclamationCircleFill } from "react-bootstrap-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLoginUserMutation } from "../../redux/user/userApi";
+import { setUser } from "../../store/store";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loginPayload, setLoginPayload] = useState({
-    emailAddress: "",
+    email: "",
     password: "",
+    role: "admin",
   });
+  const [loginUser, { data, isLoading, error, isError }] =
+    useLoginUserMutation();
 
   const handleChange = (e) => {
     setLoginPayload({ ...loginPayload, [e.target.name]: e.target.value });
   };
-  let isPasswordValid= false;
+  let isPasswordValid = false;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginUser(loginPayload);
+   
+  };
+  useEffect(()=>{
+    if (isError) {
+      console.log(error?.data?.errorDetails[0].message);
+      alert(error?.data?.errorDetails[0].message);
+      setLoginPayload({ email: "",
+        password: "",
+        role: "admin"})
+
+    } else if(data?.status === "00") {
+      console.log(data);
+      dispatch(setUser(data?.data));
+      alert("Login successful");
+      navigate("/dashboard")
+    }
+  }, [data, error])
 
   return (
     <>
@@ -42,18 +70,18 @@ export const Login = () => {
               </div>
 
               <div className="mt-3 text-xs w-[300px]">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="">
                     <label className="font-medium">Email Address</label>
                     <input
                       type="email"
                       placeholder="hello@prokhure.com"
-                      name="emailAddress"
-                      value={loginPayload.emailAddress}
+                      name="email"
+                      value={loginPayload.email}
                       onChange={handleChange}
                       className="peer border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8 invalid:border-red-600"
                     ></input>
-                    <div class="invisible peer-invalid:visible text-red-500 text-xs flex">
+                    <div className="invisible peer-invalid:visible text-red-500 text-xs flex py-1 pb-2">
                       <div className="py-0.5">
                         {" "}
                         <ExclamationCircleFill />
@@ -71,17 +99,23 @@ export const Login = () => {
                       name="password"
                       value={loginPayload.password}
                       onChange={handleChange}
-                      className={`border ${isPasswordValid ? "border-red-500 focus:border-red-500" : "border-slate-300 focus:border-slate-200"}  focus:outline-none rounded-md shadow-xs my-1 p-2 w-full h-8`}
+                      className={`border ${
+                        isPasswordValid
+                          ? "border-red-500 focus:border-red-500"
+                          : "border-slate-300 focus:border-slate-200"
+                      }  focus:outline-none rounded-md shadow-xs my-1 p-2 w-full h-8`}
                     ></input>
-{isPasswordValid && <div class="text-red-500 text-xs flex py-0.5">
-                      <div className="py-0.5">
-                        {" "}
-                        <ExclamationCircleFill />
-                      </div>{" "}
-                      <p className="px-1">
-                        You have entered an incorrect password{" "}
-                      </p>
-                    </div>}
+                    {isPasswordValid && (
+                      <div className="text-red-500 text-xs flex py-0.5">
+                        <div className="py-0.5">
+                          {" "}
+                          <ExclamationCircleFill />
+                        </div>{" "}
+                        <p className="px-1">
+                          You have entered an incorrect password{" "}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   <div className="flex justify-between my-1">
                     <div className="flex">
@@ -98,7 +132,7 @@ export const Login = () => {
                   <button
                     className="my-5 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
                     disabled={
-                      !loginPayload.emailAddress || !loginPayload.password
+                      !loginPayload.email || !loginPayload.password
                     }
                   >
                     Login

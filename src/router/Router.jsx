@@ -6,7 +6,7 @@ import { CreateAccount } from "../pages/Onboarding/CreateAccount";
 import { Login } from "../pages/Onboarding/Login";
 import { ResetPassword } from "../pages/Onboarding/ResetPassword";
 const router = createBrowserRouter([
-  { path: "/", element: <Dashboard /> },
+  { path: "/dashboard", element: <Dashboard /> },
   {path: "/signup", element: <CreateAccount/>},
   {path:"/signin", element:<Login/>},
   {path: "/reset", element:<ResetPassword/>}

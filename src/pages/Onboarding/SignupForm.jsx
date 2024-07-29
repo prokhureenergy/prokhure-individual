@@ -4,29 +4,32 @@ import {
   UniversalAccessCircle,
 } from "react-bootstrap-icons";
 import { useRegisterUserMutation } from "../../redux/user/userApi";
+import { useNavigate } from "react-router-dom";
+import { setRegisterPayload } from "../../store/store";
+import { useDispatch } from "react-redux";
 
 export const SignupForm = () => {
+  const dispatch = useDispatch();
   const [signupPayload, setSignupPayload] = useState({
     firstName: "",
     lastName: "",
-    emailAddress: "",
+    email: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setSignupPayload({ ...signupPayload, [e.target.name]: e.target.value });
   };
-  const [registerUser, { data, error, isLoading, isError }] =
-    useRegisterUserMutation();
+   
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser(signupPayload);
+    dispatch(setRegisterPayload(signupPayload));
   };
-  console.log(data);
 
   return (
     <>
       <div className="mt-3 text-xs w-[300px]">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="my-1">
             <label className="font-medium">First Name</label>
             <input
@@ -55,12 +58,12 @@ export const SignupForm = () => {
             <input
               type="email"
               placeholder="E.g hello@prokhure.com"
-              name="emailAddress"
-              value={signupPayload.emailAddress}
+              name="email"
+              value={signupPayload.email}
               onChange={handleChange}
               className="peer border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8 invalid:border-red-600"
             ></input>
-            <div class="invisible peer-invalid:visible text-red-500 text-xs flex">
+            <div className="invisible peer-invalid:visible text-red-500 text-xs flex">
               <div className="py-0.5">
                 {" "}
                 <ExclamationCircleFill />
@@ -71,7 +74,7 @@ export const SignupForm = () => {
 
           <button
             className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
-            disabled={!signupPayload.emailAddress}
+            disabled={!signupPayload.email}
           >
             Confirm Details
           </button>

@@ -65,7 +65,7 @@ export const ResetPassword = () => {
                               onChange={handleChange}
                               className="peer border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8 invalid:border-red-600"
                             ></input>
-                            <div class="invisible peer-invalid:visible text-red-500 text-xs flex">
+                            <div className="invisible peer-invalid:visible text-red-500 text-xs flex">
                               <div className="py-0.5">
                                 {" "}
                                 <ExclamationCircleFill />

@@ -27,8 +27,23 @@ export const userApi = createApi({
           method: "POST",
           body: registerPayload
         }),
-      })
+      }),
+
+      loginUser: builder.mutation({
+        query:(loginPayload)=>({
+          url: `user/login `,
+          method: "POST",
+          body: loginPayload
+        }),
+      }),
+
+      getAllUsers: builder.query({
+        query: () => ({
+          query: () => 'users',
+        }),
+      }),
+
     })
 });
 
-export const {useRegisterUserMutation}= userApi;
+export const {useRegisterUserMutation, useLoginUserMutation, useGetAllUsersQuery}= userApi;

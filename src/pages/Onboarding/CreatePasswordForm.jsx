@@ -1,15 +1,22 @@
 import { useState } from "react";
-import {
-  CheckCircleFill,
-  X,
-  XCircleFill,
-} from "react-bootstrap-icons";
+import { CheckCircleFill, X, XCircleFill } from "react-bootstrap-icons";
+import { useSelector } from "react-redux";
+import { useRegisterUserMutation } from "../../redux/user/userApi";
+import { useDispatch } from "react-redux";
+import { setCreateAccount } from "../../store/store";
+
 export const CreatePasswordForm = () => {
+  const dispatch = useDispatch();
+  const regPayload = useSelector((state) => state.userState?.registerPayload);
+  console.log(regPayload);
+
+  const [registerUser, { data, error, isLoading, isError }] =
+    useRegisterUserMutation();
+
   const [passwordPayload, setPasswordPayload] = useState({
     password: "",
     confirmPassword: "",
   });
-  // const [passwordStrength, setPasswordStrength] = useState(0);
   let passwordStrength = 0;
   const containsNumber = /\d/.test(passwordPayload.password);
   const containsCapital = /[A-Z]/.test(passwordPayload.password);
@@ -35,6 +42,27 @@ export const CreatePasswordForm = () => {
 
   const handleChange = (e) => {
     setPasswordPayload({ ...passwordPayload, [e.target.name]: e.target.value });
+  };
+console.log(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const registerPayload = {
+      firstName: regPayload.firstName,
+      lastName: regPayload.lastName,
+      businessName: "",
+      businessRegistrationNumber: "",
+      email: regPayload.email,
+      phoneCountryCode: "",
+      phoneNumber: "",
+      password: passwordPayload.password,
+      role: "customer",
+      roleType: "indivdual",
+    };
+    registerUser(registerPayload);
+  };
+
+  const handleCheckMail = (e) => {
+    dispatch(setCreateAccount(true));
   };
 
   return (
@@ -66,7 +94,6 @@ export const CreatePasswordForm = () => {
               onChange={handleChange}
               className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
             ></input>
-           
           </div>
           <div className="text-[#868C98] my-2">
             <div className="flex my-1">
@@ -148,21 +175,33 @@ export const CreatePasswordForm = () => {
           </button>
         </form>
 
-        <div className="p-2 my-3 border border-slate-300 rounded flex shadow-md">
-            <div className="text-green-400">
-                <CheckCircleFill/>
+        {data !== undefined && (
+          <>
+            <div className="p-2 my-3 border border-slate-300 rounded flex shadow-md">
+              <div className="text-green-400">
+                <CheckCircleFill />
+              </div>
+              <div className="px-3">
+                <p className="font-semibold">Account Created</p>
+                <p className="py-1 font-light">
+                  Welcome to Prokhure Marketplace. A verification email has been
+                  sent to willie.jennings@example.com
+                </p>
+                <button
+                  onClick={handleCheckMail}
+                  className="font-semibold underline"
+                >
+                  Check your mail
+                </button>
+              </div>
+              <div className="text-slate-500">
+                <button>
+                  <X />
+                </button>
+              </div>
             </div>
-            <div className="px-3">
-            <p className="font-semibold">Account Created</p>
-            <p className="py-1 font-light">Welcome to Prokhure Marketplace. A verification email has been sent to willie.jennings@example.com</p>
-            <p className="font-semibold underline">Check your mail</p>
-            </div>
-            <div className="text-slate-500">
-              <button>
-              <X/>
-                </button>  
-            </div>
-        </div>
+          </>
+        )}
       </div>
     </>
   );
