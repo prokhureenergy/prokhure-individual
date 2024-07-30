@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { CheckCircleFill, X, XCircleFill } from "react-bootstrap-icons";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { CheckCircleFill, X, XCircleFill, ExclamationCircleFill } from "react-bootstrap-icons";
+import { useSelector, useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "../../redux/user/userApi";
-import { useDispatch } from "react-redux";
-import { setCreateAccount } from "../../store/store";
+import { setCreateAccount, setPartyId } from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 export const CreatePasswordForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const regPayload = useSelector((state) => state.userState?.registerPayload);
-  console.log(regPayload);
 
   const [registerUser, { data, error, isLoading, isError }] =
     useRegisterUserMutation();
@@ -24,7 +24,6 @@ export const CreatePasswordForm = () => {
   containsNumber && passwordStrength++;
   containsCapital && passwordStrength++;
   is8Character && passwordStrength++;
-  console.log(passwordStrength);
   var strengthColour = "";
   switch (passwordStrength) {
     case 1:
@@ -39,11 +38,14 @@ export const CreatePasswordForm = () => {
     default:
       strengthColour = "bg-slate-300";
   }
-
+var confirmPasswordStatus =false; 
   const handleChange = (e) => {
     setPasswordPayload({ ...passwordPayload, [e.target.name]: e.target.value });
   };
-console.log(data);
+  if(passwordPayload.password === passwordPayload.confirmPassword){
+    confirmPasswordStatus = true;
+    console.log(confirmPasswordStatus);
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     const registerPayload = {
@@ -61,14 +63,24 @@ console.log(data);
     registerUser(registerPayload);
   };
 
+  useEffect(()=>{
+    if (isError) {
+      console.log(error?.data?.errorDetails[0].message);
+      alert(error?.data?.errorDetails[0].message);
+     } else if(data?.status === "00") {
+      dispatch(setPartyId(data?.data?.partyId));
+    }
+  }, [data, error]);
   const handleCheckMail = (e) => {
     dispatch(setCreateAccount(true));
+    navigate("/verify");
+    
   };
 
   return (
     <>
       <div className="mt-6 text-xs w-[300px]">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="my-1">
             <label className="font-medium">
               Create a Password <span className="text-red-500">*</span>
@@ -94,6 +106,16 @@ console.log(data);
               onChange={handleChange}
               className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
             ></input>
+            {!confirmPasswordStatus && <>
+            <div className="flex py-0.5 text-red-500">
+            <div className="py-0.5">
+                {" "}
+                <ExclamationCircleFill />
+              </div>
+              <p className="px-0.5">Passwords do not match</p>
+            </div>
+            </>
+}
           </div>
           <div className="text-[#868C98] my-2">
             <div className="flex my-1">
@@ -168,14 +190,14 @@ console.log(data);
           <button
             className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
             disabled={
-              passwordStrength !== 3 || !passwordPayload.confirmPassword
+              passwordStrength !== 3 || !confirmPasswordStatus
             }
           >
             Create Password
           </button>
         </form>
 
-        {data !== undefined && (
+        {data?.status ==="00" && (
           <>
             <div className="p-2 my-3 border border-slate-300 rounded flex shadow-md">
               <div className="text-green-400">
@@ -185,7 +207,7 @@ console.log(data);
                 <p className="font-semibold">Account Created</p>
                 <p className="py-1 font-light">
                   Welcome to Prokhure Marketplace. A verification email has been
-                  sent to willie.jennings@example.com
+                  sent to {regPayload.email}
                 </p>
                 <button
                   onClick={handleCheckMail}

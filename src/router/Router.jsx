@@ -5,10 +5,12 @@ import { Dashboard } from "../pages/Dashboard/Dashboard";
 import { CreateAccount } from "../pages/Onboarding/CreateAccount";
 import { Login } from "../pages/Onboarding/Login";
 import { ResetPassword } from "../pages/Onboarding/ResetPassword";
+import { VerificationForm } from "../pages/Onboarding/VerificationForm";
 const router = createBrowserRouter([
   { path: "/dashboard", element: <Dashboard /> },
   {path: "/signup", element: <CreateAccount/>},
   {path:"/signin", element:<Login/>},
-  {path: "/reset", element:<ResetPassword/>}
+  {path: "/reset", element:<ResetPassword/>},
+  {path: "/verify", element:<VerificationForm/>}
 ]);
 export default router;

@@ -8,6 +8,7 @@ const initialState = {
   user: null,
   otp: "",
   createAccount: false,
+  partyId: "",
 };
 
 const userSlice = createSlice({
@@ -25,11 +26,14 @@ const userSlice = createSlice({
     },
     setCreateAccount: (state, action)=>{
       state.createAccount = action.payload;
-    }
+    }, 
+    setPartyId: (state, action)=>{
+      state.partyId = action.payload;
+    },
   },
 });
 
-export const { setUser, setRegisterPayload, setOtp, setCreateAccount } = userSlice.actions;
+export const { setUser, setRegisterPayload, setOtp, setCreateAccount, setPartyId } = userSlice.actions;
 
 const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,

@@ -26,12 +26,6 @@ export const CreateAccount = () => {
       </>
     );
     pageForm = <CreatePasswordForm />;
-  } else if (isAccountCreated) {
-    pageHeader =  <>
-    <p className="font-semibold">Enter Verification Code</p>
-    <p className="font-normal text-xs pb-5">
-    We’ve sent a code to willie.jennings@example.com    </p>
-  </> ; pageForm = <VerificationForm />;
   } else {
     pageHeader = (
       <>
