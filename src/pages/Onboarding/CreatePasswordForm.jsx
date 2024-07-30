@@ -1,18 +1,36 @@
 import { useState, useEffect } from "react";
-import { CheckCircleFill, X, XCircleFill, ExclamationCircleFill } from "react-bootstrap-icons";
+import {
+  CheckCircleFill,
+  X,
+  XCircleFill,
+  ExclamationCircleFill,
+} from "react-bootstrap-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { useRegisterUserMutation } from "../../redux/user/userApi";
+import {
+  useRegisterUserMutation,
+  useResetPasswordMutation,
+} from "../../redux/user/userApi";
 import { setCreateAccount, setPartyId } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 
-export const CreatePasswordForm = () => {
+export const CreatePasswordForm = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const regPayload = useSelector((state) => state.userState?.registerPayload);
+  const partyId = useSelector((state) => state.userState?.partyId);
 
   const [registerUser, { data, error, isLoading, isError }] =
     useRegisterUserMutation();
 
+  const [
+    resetPassword,
+    {
+      data: resetData,
+      error: resetError,
+      isError: resetIsError,
+      isLoading: resetIsLoading,
+    },
+  ] = useResetPasswordMutation();
   const [passwordPayload, setPasswordPayload] = useState({
     password: "",
     confirmPassword: "",
@@ -38,14 +56,22 @@ export const CreatePasswordForm = () => {
     default:
       strengthColour = "bg-slate-300";
   }
-var confirmPasswordStatus =false; 
+  var confirmPasswordStatus = false;
   const handleChange = (e) => {
     setPasswordPayload({ ...passwordPayload, [e.target.name]: e.target.value });
   };
-  if(passwordPayload.password === passwordPayload.confirmPassword){
+  if (passwordPayload.password === passwordPayload.confirmPassword) {
     confirmPasswordStatus = true;
     console.log(confirmPasswordStatus);
   }
+  const handleResetSubmit = (e) => {
+    e.preventDefault();
+    const resetPayload = {
+      partyId: partyId,
+      password: passwordPayload.password,
+    };
+    resetPassword(resetPayload);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const registerPayload = {
@@ -63,24 +89,28 @@ var confirmPasswordStatus =false;
     registerUser(registerPayload);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isError) {
       console.log(error?.data?.errorDetails[0].message);
-      alert(error?.data?.errorDetails[0].message);
-     } else if(data?.status === "00") {
+    } else if (data?.status === "00") {
       dispatch(setPartyId(data?.data?.partyId));
+    } else if(resetIsError){
+      console.log(resetError?.data?.errorDetails[0].message);
+    }else if(resetData?.status ==="00"){
+      navigate("/signin");
     }
   }, [data, error]);
   const handleCheckMail = (e) => {
     dispatch(setCreateAccount(true));
     navigate("/verify");
-    
   };
 
   return (
     <>
       <div className="mt-6 text-xs w-[300px]">
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={props.value === "reset" ? handleResetSubmit : handleSubmit}
+        >
           <div className="my-1">
             <label className="font-medium">
               Create a Password <span className="text-red-500">*</span>
@@ -106,16 +136,17 @@ var confirmPasswordStatus =false;
               onChange={handleChange}
               className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
             ></input>
-            {!confirmPasswordStatus && <>
-            <div className="flex py-0.5 text-red-500">
-            <div className="py-0.5">
-                {" "}
-                <ExclamationCircleFill />
-              </div>
-              <p className="px-0.5">Passwords do not match</p>
-            </div>
-            </>
-}
+            {!confirmPasswordStatus && (
+              <>
+                <div className="flex py-0.5 text-red-500">
+                  <div className="py-0.5">
+                    {" "}
+                    <ExclamationCircleFill />
+                  </div>
+                  <p className="px-0.5">Passwords do not match</p>
+                </div>
+              </>
+            )}
           </div>
           <div className="text-[#868C98] my-2">
             <div className="flex my-1">
@@ -189,15 +220,13 @@ var confirmPasswordStatus =false;
           </div>
           <button
             className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
-            disabled={
-              passwordStrength !== 3 || !confirmPasswordStatus
-            }
+            disabled={passwordStrength !== 3 || !confirmPasswordStatus}
           >
             Create Password
           </button>
         </form>
 
-        {data?.status ==="00" && (
+        {data?.status === "00" && (
           <>
             <div className="p-2 my-3 border border-slate-300 rounded flex shadow-md">
               <div className="text-green-400">

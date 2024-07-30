@@ -2,24 +2,51 @@ import { NavBar } from "../../components/Shared/NavBar";
 import LoginFrame from "../../assets/images/Login Frame.png";
 import ResetIcon from "../../assets/icon/Reset Icon.png";
 import CustomIcon from "../../assets/images/Custom Icon.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ExclamationCircleFill } from "react-bootstrap-icons";
 import { CreatePasswordForm } from "./CreatePasswordForm";
+import { useVerifyEmailForPasswordResetMutation } from "../../redux/user/userApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setRegisterPayload, setVerifyResetEmail, setPartyId } from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 export const ResetPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [verifyEmailForPasswordReset, { data, isError, error, isLoading }] =
+    useVerifyEmailForPasswordResetMutation();
+
   const [resetPayload, setResetPayload] = useState({
-    emailAddress: "",
+    email: "",
+    role: "customer",
   });
+
   const handleChange = (e) => {
     setResetPayload({ ...resetPayload, [e.target.name]: e.target.value });
   };
-  const isEmailValid = true;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setRegisterPayload(resetPayload));
+    dispatch(setVerifyResetEmail(resetPayload.email));
+    verifyEmailForPasswordReset(resetPayload);
+  };
+  useEffect(() => {
+    if (isError) {
+      console.log(error);
+    }
+    if (data?.status === "00") {
+      dispatch(setPartyId(data?.data?.partyId));
+      navigate("/verify");
+    }
+  }, [data, error]);
+  const isEmailValid = useSelector((state) => state.userState?.isResetOtpVerified);
+console.log(isEmailValid);
   return (
     <>
       <>
         <div className="max-h-screen">
           <NavBar />
-
           <div className="flex">
             <div className="basis-7/12">
               <div className="flex justify-center items-center mt-14 pt-8">
@@ -49,12 +76,12 @@ export const ResetPassword = () => {
                   </div>
                   {isEmailValid ? (
                     <>
-                      <CreatePasswordForm />
+                      <CreatePasswordForm value="reset" />
                     </>
                   ) : (
                     <>
                       <div className="mt-3 text-xs w-[300px]">
-                        <form>
+                        <form onSubmit={handleSubmit}>
                           <div className="">
                             <label className="font-medium">Email Address</label>
                             <input

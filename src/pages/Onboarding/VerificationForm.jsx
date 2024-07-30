@@ -3,23 +3,22 @@ import {
   ExclamationCircleFill,
   X,
 } from "react-bootstrap-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavBar } from "../../components/Shared/NavBar";
 import LoginFrame from "../../assets/images/Login Frame.png";
 import CustomIcon from "../../assets/images/Custom Icon.png";
 import { useEffect, useState, useRef } from "react";
 import { useVerifyUserMutation } from "../../redux/user/userApi";
 import { useNavigate } from "react-router-dom";
+import { setIsResetOtpVerified } from "../../store/store";
 
 export const VerificationForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const regPayload = useSelector((state) => state.userState?.registerPayload);
-  const isAccountCreated = useSelector(
-    (state) => state.userState?.createAccount
-  );
-  // console.log(isAccountCreated);
   const partyId = useSelector((state) => state.userState?.partyId);
-  // console.log(partyId);
+  const resetEmail = useSelector((state) => state.userState?.verifyResetEmail);
+   console.log(resetEmail);
   const [otp, setOtp] = useState(Array(5).fill(""));
   const inputs = useRef([]);
 
@@ -56,6 +55,7 @@ export const VerificationForm = () => {
   const [verifyUser, { data, isLoading, error, isError }] =
     useVerifyUserMutation();
   const [otpType, setOtpType] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setOtpType("validate");
@@ -82,6 +82,11 @@ export const VerificationForm = () => {
     if (isError) {
       console.log(error?.data?.errorDetails[0].message);
     }
+    if(resetEmail !== "" && data?.status ==="00"){
+    dispatch(setIsResetOtpVerified(true));
+      navigate("/reset")
+    }
+
   }, [data, error]);
   return (
     <>

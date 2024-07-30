@@ -21,7 +21,7 @@ export const Login = () => {
   const handleChange = (e) => {
     setLoginPayload({ ...loginPayload, [e.target.name]: e.target.value });
   };
-  let isPasswordValid = false;
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
   const handleSubmit = (e) => {
     e.preventDefault();
     loginUser(loginPayload);
@@ -30,15 +30,13 @@ export const Login = () => {
   useEffect(()=>{
     if (isError) {
       console.log(error?.data?.errorDetails[0].message);
-      alert(error?.data?.errorDetails[0].message);
-      setLoginPayload({ email: "",
-        password: "",
-        role: "admin"})
+      setIsPasswordValid(false);
+      setLoginPayload({
+        password: "",})
 
     } else if(data?.status === "00") {
       console.log(data);
       dispatch(setUser(data?.data));
-      alert("Login successful");
       navigate("/dashboard")
     }
   }, [data, error])
@@ -101,11 +99,11 @@ export const Login = () => {
                       onChange={handleChange}
                       className={`border ${
                         isPasswordValid
-                          ? "border-red-500 focus:border-red-500"
-                          : "border-slate-300 focus:border-slate-200"
+                          ? "border-slate-300 focus:border-slate-200"
+                          :  "border-red-500 focus:border-red-500"
                       }  focus:outline-none rounded-md shadow-xs my-1 p-2 w-full h-8`}
                     ></input>
-                    {isPasswordValid && (
+                    {!isPasswordValid && (
                       <div className="text-red-500 text-xs flex py-0.5">
                         <div className="py-0.5">
                           {" "}
