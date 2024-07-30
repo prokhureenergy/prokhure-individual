@@ -1,54 +1,92 @@
-import { CheckCircleFill, X } from "react-bootstrap-icons";
+import {
+  CheckCircleFill,
+  ExclamationCircleFill,
+  X,
+} from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 import { NavBar } from "../../components/Shared/NavBar";
 import LoginFrame from "../../assets/images/Login Frame.png";
 import CustomIcon from "../../assets/images/Custom Icon.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useVerifyUserMutation } from "../../redux/user/userApi";
+import { useNavigate } from "react-router-dom";
 
 export const VerificationForm = () => {
+  const navigate = useNavigate();
   const regPayload = useSelector((state) => state.userState?.registerPayload);
   const isAccountCreated = useSelector(
     (state) => state.userState?.createAccount
   );
-  console.log(isAccountCreated);
+  // console.log(isAccountCreated);
   const partyId = useSelector((state) => state.userState?.partyId);
-  console.log(partyId);
+  // console.log(partyId);
+  const [otp, setOtp] = useState(Array(5).fill(""));
+  const inputs = useRef([]);
+
+  var t = otp.join("");
+  console.log(t);
+  const handleChange = (e, index) => {
+    const { value } = e.target;
+
+    // Only allow single digit input
+    if (value.match(/^\d$/)) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+      // Move focus to the next input
+      if (index < 5 - 1) {
+        inputs.current[index + 1].focus();
+      }
+    }
+    // Move focus to previous input on backspace
+    if (value === "" && index > 0) {
+      inputs.current[index - 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && otp[index] === "") {
+      // Move focus to previous input on backspace if current input is empty
+      if (index > 0) {
+        inputs.current[index - 1].focus();
+      }
+    }
+  };
 
   const [verifyUser, { data, isLoading, error, isError }] =
     useVerifyUserMutation();
-
-  const [verifyOtpPayload, setVerifyOtpPayload] = useState({
-    partyId: "",
-    token: "",
-    action: "validate",
-  });
-
-  const otpValue = [];
-
+  const [otpType, setOtpType] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
+    setOtpType("validate");
+    const verifyOtpPayload = {
+      partyId: partyId,
+      token: t,
+      action: "validate",
+    };
+    console.log(verifyOtpPayload);
     verifyUser(verifyOtpPayload);
   };
 
   const handleResendCode = () => {
-    setVerifyOtpPayload.action("resend");
+    setOtpType("resend");
+    const verifyOtpPayload = {
+      partyId: partyId,
+      token: t,
+      action: "resend",
+    };
     verifyUser(verifyOtpPayload);
   };
 
   useEffect(() => {
     if (isError) {
       console.log(error?.data?.errorDetails[0].message);
-      alert(error?.data?.errorDetails[0].message);
-    } else if (data?.status === "00") {
-      console.log(data);
     }
   }, [data, error]);
   return (
     <>
       <div className="max-h-screen">
         <NavBar />
-
         <div className="flex">
           <div className="basis-7/12">
             <div className="flex justify-center items-center mt-14 pt-8">
@@ -74,58 +112,88 @@ export const VerificationForm = () => {
                   <div className="mt-3 text-xs w-[300px]">
                     <form onSubmit={handleSubmit}>
                       <div className="flex m-2 items-center justify-center">
-                        <input
-                          className="p-4 border border-slate-300 rounded-md shadow-sm h-[50px] w-[50px] m-2 text-center"
-                          maxLength={1}
-                          type="text"
-                        />
-                        <input
-                          className="p-4 border border-slate-300 rounded-md shadow-sm h-[50px] w-[50px] m-2 text-center"
-                          maxLength={1}
-                          type="text"
-                        />
-                        <input
-                          className="p-4 border border-slate-300 rounded-md shadow-sm h-[50px] w-[50px] m-2 text-center"
-                          maxLength={1}
-                          type="text"
-                        />
-                        <input
-                          className="p-4 border border-slate-300 rounded-md shadow-sm h-[50px] w-[50px] m-2 text-center"
-                          maxLength={1}
-                          type="text"
-                        />
-                        <input
-                          className="p-4 border border-slate-300 rounded-md shadow-sm h-[50px] w-[50px] m-2 text-center"
-                          maxLength={1}
-                          type="text"
-                        />
+                        {otp.map((_, index) => (
+                          <input
+                            key={index}
+                            className="p-4 border border-slate-300 rounded-md shadow-sm h-[50px] w-[50px] m-2 text-center"
+                            maxLength={1}
+                            type="text"
+                            value={otp[index]}
+                            onChange={(e) => handleChange(e, index)}
+                            onKeyDown={(e) => handleKeyDown(e, index)}
+                            ref={(el) => (inputs.current[index] = el)}
+                          />
+                        ))}
                       </div>
+                      <button
+                        className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
+                        disabled={t.length !== 5}
+                      >
+                        Verify Email
+                      </button>
                     </form>
-
-                    <button
-                      className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
-                      disabled={otpValue.length !== 6}
-                    >
-                      Verify Email
-                    </button>
                     <div className="text-center mt-3">
                       <p>Experiencing issues receiving the code?</p>
-                      <button onClick={handleResendCode} className="font-semibold underline">
+                      <button
+                        onClick={handleResendCode}
+                        className="font-semibold underline"
+                      >
                         Resend Code
                       </button>
                     </div>
                     {data?.status === "00" && (
                       <>
-                        <div className="p-2 my-5 border border-slate-200 rounded flex shadow-md">
-                          <div className="text-green-400 py-0.5">
-                            <CheckCircleFill />
+                        {otpType === "resend" ? (
+                          <>
+                            <div className="p-2 my-5 rounded flex justify-between bg-slate-50">
+                              <div className="flex">
+                                <div className="py-1.5 text-green-400">
+                                  <CheckCircleFill />
+                                </div>
+                                <p className="p-1 font-light">
+                                  {data?.data?.message}
+                                </p>
+                              </div>
+
+                              <div className="text-slate-500">
+                                <button>
+                                  <X />
+                                </button>
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="p-2 my-5 border border-slate-200 rounded flex shadow-md">
+                            <div className="text-green-400 py-0.5">
+                              <CheckCircleFill />
+                            </div>
+                            <div className="px-3">
+                              <p className="font-semibold">Signup Complete</p>
+                              <p className="py-1 font-light">
+                                You have successfully signed up to Prokhure{" "}
+                              </p>
+                            </div>
+                            <div className="text-slate-500">
+                              <button>
+                                <X />
+                              </button>
+                            </div>
                           </div>
-                          <div className="px-3">
-                            <p className="font-semibold">Signup Complete</p>
-                            <p className="py-1 font-light">
-                              You have successfully signed up to Prokhure
+                        )}
+                      </>
+                    )}
+                    {isError && (
+                      <>
+                        <div className="p-2 my-5 rounded flex justify-between bg-slate-50 text-red-500">
+                          <div className="flex">
+                            <div className="py-1.5">
+                              <ExclamationCircleFill />
+                            </div>
+                            <p className="p-1 font-light">
+                              {error?.data?.errorDetails[0].message}
                             </p>
                           </div>
+
                           <div className="text-slate-500">
                             <button>
                               <X />
