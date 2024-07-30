@@ -13,7 +13,7 @@ export const SidebarList = [
   { title: "Subscription", icon: <Person /> },
   { title: "Category & Pricing", icon: <Person /> },
   { title: "Wishlist", icon: <Heart /> },
-  { title: "Purchase & History", icon: <Person /> },
+  { title: "Purchase History", icon: <Person /> },
   { title: "Messages", icon: <Person /> },
   { title: "Support", icon: <Headphones /> },
   { title: "Signout", icon: <Power /> },
@@ -41,9 +41,9 @@ export const SideBar = () => {
 export const ActiveItem = (props) => {
   return (
     <>
-      <div className="py-2 flex gap-6">
+      <div className="py-2 flex gap-6 text-sm">
         <div className="bg-blue-900 p-1 rounded-r-md"> </div>
-        <div className="flex justify-between bg-slate-100 px-2 rounded-md w-2/3">
+        <div className="flex justify-between bg-slate-100 p-2 rounded-md w-4/5">
           <div className="px-2 flex">
             <div className="py-1.5 text-blue-900">{props.icon}</div>
             <p className="px-2 py-0.5">{props.title}</p>
