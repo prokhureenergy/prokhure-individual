@@ -140,7 +140,9 @@ export const Login = () => {
             </div>
           </div>
         </div>
-        <p className="text-xs px-4 mt-10 pb-1">© 2024 Prokhure Energy</p>
+        <footer> 
+      <p className="text-xs py-2 px-4">© 2024 Prokhure Energy</p>
+      </footer>
       </div>
     </>
   );

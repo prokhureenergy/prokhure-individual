@@ -20,8 +20,10 @@ console.log(userData);
 
   return (
     <>
-      <div className="bg-slate-50 w-dvw min-h-screen">
+      <div className="bg-white w-dvw h-screen">
+        <div className="bg-white">
         <NavBar value="dashboard"/>
+        </div>
         <div className="grid grid-cols-7 gap-8 mx-32 mt-20">
           <div className="col-span-2 w-[300px]">
             <>

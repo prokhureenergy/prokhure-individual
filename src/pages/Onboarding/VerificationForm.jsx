@@ -5,7 +5,7 @@ import {
 } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { NavBar } from "../../components/Shared/NavBar";
-import LoginFrame from "../../assets/images/Login Frame.png";
+import LoginFrame from "../../assets/images/Login Frame.svg";
 import CustomIcon from "../../assets/images/Custom Icon.png";
 import { useEffect, useState, useRef } from "react";
 import { useVerifyUserMutation } from "../../redux/user/userApi";
@@ -18,7 +18,7 @@ export const VerificationForm = () => {
   const regPayload = useSelector((state) => state.userState?.registerPayload);
   const partyId = useSelector((state) => state.userState?.partyId);
   const resetEmail = useSelector((state) => state.userState?.verifyResetEmail);
-   console.log(resetEmail);
+  console.log(resetEmail);
   const [otp, setOtp] = useState(Array(5).fill(""));
   const inputs = useRef([]);
 
@@ -82,16 +82,17 @@ export const VerificationForm = () => {
     if (isError) {
       console.log(error?.data?.errorDetails[0].message);
     }
-    if(resetEmail !== "" && data?.status ==="00"){
-    dispatch(setIsResetOtpVerified(true));
-      navigate("/reset")
+    if (resetEmail !== "" && data?.status === "00") {
+      dispatch(setIsResetOtpVerified(true));
+      navigate("/reset");
     }
-
   }, [data, error]);
   return (
     <>
-      <div className="max-h-screen">
-        <NavBar />
+      <div className="h-screen">
+        <div className="bg-white">
+          <NavBar />
+        </div>
         <div className="flex">
           <div className="basis-7/12">
             <div className="flex justify-center items-center mt-14 pt-8">
@@ -217,7 +218,9 @@ export const VerificationForm = () => {
             <img src={LoginFrame} alt="login" className="" />
           </div>
         </div>
-        <p className="text-xs px-4 py-2">© 2024 Prokhure Energy</p>
+        <footer>
+          <p className="text-xs py-2 px-4">© 2024 Prokhure Energy</p>
+        </footer>{" "}
       </div>
     </>
   );

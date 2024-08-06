@@ -1,5 +1,5 @@
 import { NavBar } from "../../components/Shared/NavBar";
-import LoginFrame from "../../assets/images/Login Frame.png";
+import LoginFrame from "../../assets/images/Login Frame.svg";
 import ResetIcon from "../../assets/icon/Reset Icon.png";
 import CustomIcon from "../../assets/images/Custom Icon.png";
 import { useEffect, useState } from "react";
@@ -43,10 +43,11 @@ export const ResetPassword = () => {
   const isEmailValid = useSelector((state) => state.userState?.isResetOtpVerified);
 console.log(isEmailValid);
   return (
-    <>
       <>
         <div className="max-h-screen">
+          <div className="bg-white">
           <NavBar />
+          </div>
           <div className="flex">
             <div className="basis-7/12">
               <div className="flex justify-center items-center mt-14 pt-8">
@@ -120,9 +121,9 @@ console.log(isEmailValid);
               <img src={LoginFrame} alt="login" className="" />
             </div>
           </div>
-          <p className="text-xs px-4 py-2">© 2024 Prokhure Energy</p>
-        </div>
+          <footer> 
+      <p className="text-xs py-2 px-4">© 2024 Prokhure Energy</p>
+      </footer>        </div>
       </>
-    </>
   );
 };

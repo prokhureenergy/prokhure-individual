@@ -8,7 +8,7 @@ import {
   Search
 } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import cart from "../../assets/icon/cart.png";
+import { RiShoppingCartLine } from "@remixicon/react";
 
 export const NavBar = (props) => {
   //const user = "Johnson";
@@ -107,8 +107,7 @@ export const NavBar = (props) => {
 
           <div className="flex">
             <div className="p-1 px-2">
-              {" "}
-              <img src={cart} alt="cart" className="h-3 w-3" />{" "}
+              <RiShoppingCartLine size={14}/>
             </div>
             <p className="text-[#0055FF] py-0.5">Cart</p>
           </div>
@@ -142,7 +141,7 @@ export const NavBar = (props) => {
 
   return (
     <>
-      <nav className="shadow-md p-2">
+      <nav className="shadow-sm p-2">
         <div className="flex justify-between">
           <div className="p-2 flex items-center justify-center">
             <img src={logo} alt="logo" />
