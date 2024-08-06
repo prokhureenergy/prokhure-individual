@@ -1,4 +1,4 @@
-import logo from "../../assets/icon/Prokhure.png";
+import logo from "../../assets/icon/Prokhure.svg";
 import {
   Cart,
   Bell,
