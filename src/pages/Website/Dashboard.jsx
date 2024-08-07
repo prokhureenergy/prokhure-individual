@@ -33,7 +33,7 @@ export const WebsiteDashboard = () => {
                 <li className="my-1">Instrumentation</li>
                 <li className="my-1">Marine</li>
               </ul>
-              <button className="border border-blue-600 text-blue-600 rounded-md p-1">
+              <button className="border border-blue-600 text-blue-600 rounded-md p-1 w-full">
                 View all
               </button>
             </div>

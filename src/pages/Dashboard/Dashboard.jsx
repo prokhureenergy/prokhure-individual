@@ -9,9 +9,9 @@ import { Support } from "../Support/Support";
 import { Account } from "../Account/Account";
 import { Category } from "../Category/Category";
 import { SidebarList } from "../../components/SideBar/SideBar";
-import { Search } from "react-bootstrap-icons";
 import { Wishlist } from "../Wishlist/Wishlist";
 import { PurchaseHistory } from "../Order/PurchaseHistory";
+import { RiSearch2Line } from "@remixicon/react";
 
 export const Dashboard = () => {
   const userData = useSelector((state) => state.userState.user?.userDetail);
@@ -30,7 +30,7 @@ console.log(userData);
               <div className="bg-white border border-slate-200 rounded-lg">
                 <div className="my-3 text-sm flex items-center justify-center">
                   <form className="flex w-4/5 h-8 rounded bg-white border border-slate-200 ">
-                    <Search
+                    <RiSearch2Line
                       className="absolute h-4 w-4 flex ml-3 my-2"
                       color="#D0D5DD"
                     />

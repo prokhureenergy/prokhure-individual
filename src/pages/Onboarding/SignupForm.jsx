@@ -1,9 +1,7 @@
 import { useState } from "react";
 import {
   ExclamationCircleFill,
-  UniversalAccessCircle,
 } from "react-bootstrap-icons";
-import { useRegisterUserMutation } from "../../redux/user/userApi";
 import { useNavigate } from "react-router-dom";
 import { setRegisterPayload } from "../../store/store";
 import { useDispatch } from "react-redux";
@@ -28,7 +26,7 @@ export const SignupForm = () => {
 
   return (
     <>
-      <div className="mt-3 text-xs w-[300px]">
+      <div className="mt-3 text-sm w-[300px]">
         <form onSubmit={handleSubmit}>
           <div className="my-1">
             <label className="font-medium">First Name</label>
@@ -73,7 +71,7 @@ export const SignupForm = () => {
           </div>
 
           <button
-            className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
+            className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#f1f2f4] disabled:text-slate-300 w-full shadow-sm text-sm"
             disabled={!signupPayload.email}
           >
             Confirm Details

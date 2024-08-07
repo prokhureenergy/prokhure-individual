@@ -107,13 +107,13 @@ export const CreatePasswordForm = (props) => {
 
   return (
     <>
-      <div className="mt-6 text-xs w-[300px]">
+      <div className="mt-6 text-sm w-[300px]">
         <form
           onSubmit={props.value === "reset" ? handleResetSubmit : handleSubmit}
         >
           <div className="my-1">
             <label className="font-medium">
-              Create a Password <span className="text-red-500">*</span>
+              Create a Password
             </label>
             <input
               type="password"
@@ -126,7 +126,7 @@ export const CreatePasswordForm = (props) => {
           </div>
           <div className="my-2">
             <label className="font-medium">
-              Confirm Password <span className="text-red-500">*</span>
+              Confirm Password
             </label>
             <input
               type="password"

@@ -1,14 +1,6 @@
 import logo from "../../assets/icon/Prokhure.svg";
-import {
-  Cart,
-  Bell,
-  ChevronDown,
-  Headphones,
-  QuestionCircle,
-  Search
-} from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import { RiShoppingCartLine } from "@remixicon/react";
+import { RiArrowDownSLine, RiNotification3Line, RiQuestionLine, RiSearch2Line, RiShoppingCartLine } from "@remixicon/react";
 
 export const NavBar = (props) => {
   //const user = "Johnson";
@@ -22,17 +14,17 @@ export const NavBar = (props) => {
       <>
         <div className="flex items-center justify-center">
           <div className="px-2 flex font-semibold">
-            <Cart /> <p className="text-xs px-1"> Cart</p>
+            <RiShoppingCartLine size={14} /> <p className="text-xs px-1"> Cart</p>
           </div>
           <div className="px-2 font-semibold">
-            <Bell />
+            <RiNotification3Line size={14}/>
           </div>
           <div className="px-2 relative select-none" id="dropdownButton">
             <div onClick={toggleDropdown}>
               <div className="text-xs font-semibold border border-gray-200 shadow-sm rounded-md px-3 py-2 flex items-center justify-center">
                 Hi Johnson
                 <div className="p-1 pl-2">
-                  <ChevronDown />
+                  <RiArrowDownSLine size={14}/>
                 </div>
               </div>
             </div>
@@ -73,7 +65,7 @@ export const NavBar = (props) => {
       <>
           <div className="my-3 text-xs flex items-center justify-center">
             <form className="flex h-8 rounded-md bg-white border border-slate-200">
-              <Search
+              <RiSearch2Line
                 className="absolute h-3 w-3 flex ml-3 my-2.5"
                 color="#D0D5DD"
               />
@@ -91,7 +83,7 @@ export const NavBar = (props) => {
               {" "}
               <p className="text-[#0055FF] py-0.5"> Sign In</p>{" "}
               <div className="p-1">
-                <ChevronDown />{" "}
+                <RiArrowDownSLine size={14} />{" "}
               </div>{" "}
             </div>
           </Link>
@@ -100,7 +92,7 @@ export const NavBar = (props) => {
             <div className="border border-[#0055FF] rounded-md p-1 flex justify-between mx-2">
               <p className="text-[#0055FF] py-0.5"> Sign Up</p>{" "}
               <div className="p-1">
-                <ChevronDown />{" "}
+                <RiArrowDownSLine size={14} />{" "}
               </div>{" "}
             </div>
           </Link>
@@ -113,12 +105,12 @@ export const NavBar = (props) => {
           </div>
           <div className="flex px-2">
             <div className="p-1">
-              <QuestionCircle />
+              <RiQuestionLine size={14} />
             </div>
             <p className="text-[#0055FF] py-0.5 px-1">Help</p>
             <div className="p-1">
               {" "}
-              <ChevronDown />
+              <RiArrowDownSLine size={14} />
             </div>
           </div>
         </div>
@@ -128,11 +120,8 @@ export const NavBar = (props) => {
     navbarContent = (
       <>
         <div className="flex items-center justify-center text-slate-700">
-          <div className="font-semibold bg-white border border-gray-200 shadow-sm rounded-md pr-2 py-2 mx-2 flex">
-            <div className="py-1 px-2">
-              <Headphones />
-            </div>
-            <p>Contact us</p>
+          <div className="font-semibold bg-white border border-gray-200 shadow-sm rounded-md py-2 mx-2 flex text-center">
+            <p className="px-3">Contact us</p>
           </div>
         </div>
       </>

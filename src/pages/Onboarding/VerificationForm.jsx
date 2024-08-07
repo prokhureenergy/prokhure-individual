@@ -106,8 +106,8 @@ export const VerificationForm = () => {
                     />
                   </div>
                   <div>
-                    <p className="font-semibold">Enter Verification Code</p>
-                    <p className="font-normal text-xs pb-5">
+                    <p className="text-lg font-semibold">Enter Verification Code</p>
+                    <p className="font-normal text-sm pb-5">
                       We’ve sent a code to {regPayload?.email}{" "}
                     </p>
                   </div>
@@ -115,7 +115,7 @@ export const VerificationForm = () => {
                 </div>
 
                 <div>
-                  <div className="mt-3 text-xs w-[300px]">
+                  <div className="mt-3 text-sm w-[300px]">
                     <form onSubmit={handleSubmit}>
                       <div className="flex m-2 items-center justify-center">
                         {otp.map((_, index) => (
@@ -218,8 +218,8 @@ export const VerificationForm = () => {
             <img src={LoginFrame} alt="login" className="" />
           </div>
         </div>
-        <footer>
-          <p className="text-xs py-2 px-4">© 2024 Prokhure Energy</p>
+        <footer className="fixed bottom-0">
+          <p className="text-sm py-2 px-4">© 2024 Prokhure Energy</p>
         </footer>{" "}
       </div>
     </>

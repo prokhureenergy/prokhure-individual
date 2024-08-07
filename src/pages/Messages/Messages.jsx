@@ -1,5 +1,5 @@
+import { RiSearch2Line } from "@remixicon/react";
 import { useState } from "react";
-import { Search } from "react-bootstrap-icons";
 
 export const Messages = () => {
   const [active, setActive] = useState("All");
@@ -56,7 +56,7 @@ export const Messages = () => {
               <div>
                 <div className="my-4 mx-2 h-[20px] text-xs">
                   <form className="flex rounded-md bg-white border border-gray-200 shadow-sm">
-                    <Search
+                    <RiSearch2Line
                       className="absolute h-3 w-3 flex ml-2 my-2"
                       color="#D0D5DD"
                     />

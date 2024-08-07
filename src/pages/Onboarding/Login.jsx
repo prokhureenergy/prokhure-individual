@@ -57,17 +57,17 @@ export const Login = () => {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-lg">
                     Login to your Prokhure account
                   </p>
-                  <p className="font-normal text-xs pb-5">
+                  <p className="font-normal text-sm pb-5">
                     Enter your details to login.
                   </p>
                 </div>
                 <hr />
               </div>
 
-              <div className="mt-3 text-xs w-[300px]">
+              <div className="mt-3 text-sm w-[300px]">
                 <form onSubmit={handleSubmit}>
                   <div className="">
                     <label className="font-medium">Email Address</label>
@@ -140,8 +140,8 @@ export const Login = () => {
             </div>
           </div>
         </div>
-        <footer> 
-      <p className="text-xs py-2 px-4">© 2024 Prokhure Energy</p>
+        <footer className="fixed bottom-0"> 
+      <p className="text-sm py-2 px-4">© 2024 Prokhure Energy</p>
       </footer>
       </div>
     </>
