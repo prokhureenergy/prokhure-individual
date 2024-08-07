@@ -10,11 +10,16 @@ import product5 from "../../assets/images/Website/product5.svg";
 import { ProductCategory } from "../../components/Website/ProductCategory";
 import voucherImage from "../../assets/images/Website/VoucherImage.jpeg";
 import { Footer } from "../../components/Shared/Footer";
+import { useNavigate } from "react-router-dom";
 
 export const WebsiteDashboard = () => {
+  const navigate = useNavigate();
+  const handleSignUp =()=>{
+navigate("/signup");
+  }
   return (
     <>
-      <div className="bg-[#F6F8FA] h-screen">
+      <div className="bg-[#F6F8FA] h-screen font-prokhure">
         <div className="bg-white">
           <NavBar value="website" />
         </div>
@@ -42,7 +47,7 @@ export const WebsiteDashboard = () => {
                 alt="WebsiteImage"
                 className="w-full h-[308px] object-cover absolute mix-blend-overlay rounded-md"
               />
-              <div className="text-[#FAFAFA] w-[340px] p-5 flex items-center justify-center mx-10 my-5 relative">
+              <div className="text-[#FAFAFA] w-[360px] p-5 flex items-center justify-center mx-10 my-5 relative">
                 <div>
                   <p className="text-3xl font-bold"> Super fast Performance</p>
                   <p className="text-center text-sm font-light py-2">
@@ -170,9 +175,8 @@ export const WebsiteDashboard = () => {
                     organisation, and it becomes more essential as you ascend
                     the ladder. In this practical course, professor and author
                   </p>
-                  <button className="bg-[#0055FF] text-white p-1.5 rounded-md flex">
+                  <button className="bg-[#0055FF] text-white p-2 rounded-md" onClick={handleSignUp}>
                     <p>Sign Up</p>
-                    <RiArrowRightSLine />
                   </button>
                 </div>
               </div>
