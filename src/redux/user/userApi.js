@@ -18,40 +18,62 @@ const baseQuery = fetchBaseQuery({
 });
 
 export const userApi = createApi({
-    reducerPath: "userApi",
-    baseQuery: baseQuery,
-    endpoints:(builder)=>({
-      registerUser: builder.mutation({
-        query: (registerPayload) => ({
-          url: `user/registration`,
-          method: "POST",
-          body: registerPayload
-        }),
+  reducerPath: "userApi",
+  baseQuery: baseQuery,
+  endpoints: (builder) => ({
+    registerUser: builder.mutation({
+      query: (registerPayload) => ({
+        url: `user/registration`,
+        method: "POST",
+        body: registerPayload,
       }),
+    }),
 
-      loginUser: builder.mutation({
-        query:(loginPayload)=>({
-          url: `user/login`,
-          method: "POST",
-          body: loginPayload
-        }),
+    loginUser: builder.mutation({
+      query: (loginPayload) => ({
+        url: `user/login`,
+        method: "POST",
+        body: loginPayload,
       }),
+    }),
 
-      verifyUser: builder.mutation({
-        query:(verifyPayload)=>({
-          url: `user/token`,
-          method: "POST",
-          body: verifyPayload
-        }),
+    verifyUser: builder.mutation({
+      query: (verifyPayload) => ({
+        url: `user/token`,
+        method: "POST",
+        body: verifyPayload,
       }),
+    }),
 
-      getAllUsers: builder.query({
-        query: () => ({
-          query: () => 'users',
-        }),
+    verifyEmailForPasswordReset: builder.mutation({
+      query: (verifyEmailPayload) => ({
+        url: `user/password/reset/email`,
+        method: "POST",
+        body: verifyEmailPayload,
       }),
+    }),
 
-    })
+    resetPassword: builder.mutation({
+      query: (resetPayload) => ({
+        url: `user/password/reset`,
+        method: "POST",
+        body: resetPayload,
+      }),
+    }),
+
+    getAllUsers: builder.query({
+      query: () => ({
+        query: () => "users",
+      }),
+    }),
+  }),
 });
 
-export const {useRegisterUserMutation, useLoginUserMutation, useVerifyUserMutation, useGetAllUsersQuery}= userApi;
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useVerifyUserMutation,
+  useVerifyEmailForPasswordResetMutation,
+  useResetPasswordMutation,
+  useGetAllUsersQuery,
+} = userApi;

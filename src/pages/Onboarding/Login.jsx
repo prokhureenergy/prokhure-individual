@@ -1,11 +1,12 @@
 import { NavBar } from "../../components/Shared/NavBar";
 import CustomIcon from "../../assets/images/Custom Icon.png";
 import { Link, useNavigate } from "react-router-dom";
-import { ExclamationCircleFill } from "react-bootstrap-icons";
 import { useState, useEffect } from "react";
 import { useLoginUserMutation } from "../../redux/user/userApi";
 import { setUser } from "../../store/store";
 import { useDispatch } from "react-redux";
+import { RiEyeLine, RiEyeOffLine, RiErrorWarningFill } from "@remixicon/react";
+import { LoadingSpinner } from "../../components/LoadingSpinner";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -19,33 +20,44 @@ export const Login = () => {
     useLoginUserMutation();
 
   const handleChange = (e) => {
+    setIsPasswordValid(true);
     setLoginPayload({ ...loginPayload, [e.target.name]: e.target.value });
   };
-  let isPasswordValid = false;
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(<RiEyeOffLine size={14} />);
+  const handlePasswordToggle = () => {
+    if (type === "password") {
+      setIcon(<RiEyeLine size={14} />);
+      setType("text");
+    } else {
+      setIcon(<RiEyeOffLine size={14} />);
+      setType("password");
+    }
+  };
+
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
   const handleSubmit = (e) => {
     e.preventDefault();
     loginUser(loginPayload);
-   
   };
-  useEffect(()=>{
+  useEffect(() => {
     if (isError) {
-      console.log(error?.data?.errorDetails[0].message);
-      alert(error?.data?.errorDetails[0].message);
-      setLoginPayload({ email: "",
+      setIsPasswordValid(false);
+      setLoginPayload({
+        email: loginPayload.email,
         password: "",
-        role: "admin"})
-
-    } else if(data?.status === "00") {
+        role: "admin",
+      });
+    } else if (data?.status === "00") {
       console.log(data);
       dispatch(setUser(data?.data));
-      alert("Login successful");
-      navigate("/dashboard")
+      navigate("/dashboard");
     }
-  }, [data, error])
+  }, [data, error]);
 
   return (
     <>
-      <div className="h-screen bg-gradient-to-tr from-pink-100 from-10% via-white via-60% to-emerald-100 to-90%">
+      <div className="font-prokhure h-screen bg-gradient-to-tr from-pink-100 from-10% via-white via-60% to-emerald-100 to-90%">
         <NavBar />
         <div className="flex justify-center items-center">
           <div className="flex justify-center items-center mt-14 pt-8 w-[400px] rounded-lg pb-4 bg-white border border-slate-200">
@@ -59,17 +71,17 @@ export const Login = () => {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-lg">
                     Login to your Prokhure account
                   </p>
-                  <p className="font-normal text-xs pb-5">
+                  <p className="font-normal text-sm pb-5">
                     Enter your details to login.
                   </p>
                 </div>
                 <hr />
               </div>
 
-              <div className="mt-3 text-xs w-[300px]">
+              <div className="mt-3 text-sm w-[300px]">
                 <form onSubmit={handleSubmit}>
                   <div className="">
                     <label className="font-medium">Email Address</label>
@@ -82,10 +94,8 @@ export const Login = () => {
                       className="peer border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8 invalid:border-red-600"
                     ></input>
                     <div className="invisible peer-invalid:visible text-red-500 text-xs flex py-1 pb-2">
-                      <div className="py-0.5">
-                        {" "}
-                        <ExclamationCircleFill />
-                      </div>{" "}
+                      {" "}
+                      <RiErrorWarningFill size={14} />
                       <p className="px-1">
                         Please provide a valid email address.{" "}
                       </p>
@@ -93,24 +103,33 @@ export const Login = () => {
                   </div>
                   <div className="mb-1">
                     <label className="font-medium">Password</label>
-                    <input
-                      type="password"
-                      placeholder=""
-                      name="password"
-                      value={loginPayload.password}
-                      onChange={handleChange}
-                      className={`border ${
-                        isPasswordValid
-                          ? "border-red-500 focus:border-red-500"
-                          : "border-slate-300 focus:border-slate-200"
-                      }  focus:outline-none rounded-md shadow-xs my-1 p-2 w-full h-8`}
-                    ></input>
-                    {isPasswordValid && (
+                    <div className="flex">
+                      <input
+                        type={type}
+                        placeholder=""
+                        name="password"
+                        value={loginPayload.password}
+                        onChange={handleChange}
+                        className={`border ${
+                          isPasswordValid
+                            ? "border-slate-300 focus:border-slate-200"
+                            : "border-red-500 focus:border-red-500"
+                        }  focus:outline-none rounded-md shadow-xs my-1 p-2 w-full h-8`}
+                      />
+                      <span
+                        className="absolute my-3 ml-64 pl-4"
+                        onClick={handlePasswordToggle}
+                      >
+                        <p className="flex justify-end">{icon} </p>
+                      </span>
+                    </div>
+
+                    {!isPasswordValid && (
                       <div className="text-red-500 text-xs flex py-0.5">
                         <div className="py-0.5">
                           {" "}
-                          <ExclamationCircleFill />
-                        </div>{" "}
+                          <RiErrorWarningFill size={14} />
+                        </div>
                         <p className="px-1">
                           You have entered an incorrect password{" "}
                         </p>
@@ -130,19 +149,31 @@ export const Login = () => {
                     </div>
                   </div>
                   <button
-                    className="my-5 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
+                    className="my-5 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm flex items-center justify-center"
                     disabled={
-                      !loginPayload.email || !loginPayload.password
+                      !loginPayload.email || loginPayload.password === ""
                     }
                   >
-                    Login
+                    <p className="text-center"> Login</p>
+                    
+                    {isLoading && (
+                      <>
+                        {" "}
+                        <span className="px-3">
+                          {" "}
+                          <LoadingSpinner />{" "}
+                        </span>
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-        <p className="text-xs px-4 mt-10 pb-1">© 2024 Prokhure Energy</p>
+        <footer className="fixed bottom-0">
+          <p className="text-sm py-2 px-4">© 2024 Prokhure Energy</p>
+        </footer>
       </div>
     </>
   );

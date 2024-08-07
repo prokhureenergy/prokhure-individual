@@ -5,8 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { ApiProvider } from '@reduxjs/toolkit/query/react';
-import { userApi } from './redux/user/userApi';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

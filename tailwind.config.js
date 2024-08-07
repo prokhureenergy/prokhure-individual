@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Apercu Pro', 'system-ui'],
+        sans: ['sans-serif', 'system-ui'],
+        prokhure: ['Apercu Pro', 'sans-serif']
       },
     },
   },

@@ -1,5 +1,5 @@
 import { NavBar } from "../../components/Shared/NavBar";
-import LoginFrame from "../../assets/images/Login Frame.png";
+import LoginFrame from "../../assets/images/Login Frame.svg";
 import CustomIcon from "../../assets/images/Custom Icon.png";
 import { SignupForm } from "./SignupForm";
 import { useState } from "react";
@@ -20,7 +20,7 @@ export const CreateAccount = () => {
     pageHeader = (
       <>
         <p className="font-semibold">Create your Password</p>
-        <p className="font-normal text-xs pb-5">
+        <p className="font-normal text-sm pb-5">
           Set up a secure password to protect your account.{" "}
         </p>
       </>
@@ -30,7 +30,7 @@ export const CreateAccount = () => {
     pageHeader = (
       <>
         <p className="font-semibold">Sign up to Prokhure</p>
-        <p className="font-normal text-xs pb-5">
+        <p className="font-normal text-sm pb-5">
           Enter your details to signup.
         </p>
       </>
@@ -39,11 +39,12 @@ export const CreateAccount = () => {
   }
   return (
     <>
-    <div className="max-h-screen">
+    <div className="bg-white h-screen font-prokhure">
+      <div>
       <NavBar />
-      
+      </div>  
       <div className="flex">
-        <div className="basis-7/12">
+        <div className="basis-7/12 border-t border-slate-100">
           <div className="flex justify-center items-center mt-14 pt-8">
             <div>
               <div className="text-center">
@@ -61,17 +62,20 @@ export const CreateAccount = () => {
 
               <div>
                {pageForm}
+              
               </div>
             </div>
           </div>
-
+          <footer className="fixed bottom-0"> 
+      <p className="text-sm py-2 px-4">© 2024 Prokhure Energy</p>
+      </footer>
         </div>
 
         <div className="basis-5/12 bg-slate-50">
           <img src={LoginFrame} alt="login" className="" />
         </div>
       </div>
-      <p className="text-xs px-4 py-2">© 2024 Prokhure Energy</p>
+     
       </div>
     </>
   );

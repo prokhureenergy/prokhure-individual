@@ -1,12 +1,8 @@
 import { useState } from "react";
-import {
-  ExclamationCircleFill,
-  UniversalAccessCircle,
-} from "react-bootstrap-icons";
-import { useRegisterUserMutation } from "../../redux/user/userApi";
 import { useNavigate } from "react-router-dom";
 import { setRegisterPayload } from "../../store/store";
 import { useDispatch } from "react-redux";
+import { RiErrorWarningFill } from "@remixicon/react";
 
 export const SignupForm = () => {
   const dispatch = useDispatch();
@@ -28,7 +24,7 @@ export const SignupForm = () => {
 
   return (
     <>
-      <div className="mt-3 text-xs w-[300px]">
+      <div className="mt-3 text-sm w-[300px]">
         <form onSubmit={handleSubmit}>
           <div className="my-1">
             <label className="font-medium">First Name</label>
@@ -64,16 +60,16 @@ export const SignupForm = () => {
               className="peer border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8 invalid:border-red-600"
             ></input>
             <div className="invisible peer-invalid:visible text-red-500 text-xs flex">
-              <div className="py-0.5">
-                {" "}
-                <ExclamationCircleFill />
-              </div>{" "}
+            <div className="py-1">
+                    {" "}
+                    <RiErrorWarningFill size={14} />
+                  </div>
               <p className="px-1">Please provide a valid email address. </p>
             </div>
           </div>
 
           <button
-            className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
+            className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#f1f2f4] disabled:text-slate-300 w-full shadow-sm text-sm"
             disabled={!signupPayload.email}
           >
             Confirm Details

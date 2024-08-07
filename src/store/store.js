@@ -6,9 +6,10 @@ import { userApi } from "../redux/user/userApi";
 const initialState = {
   registerPayload: null,
   user: null,
-  otp: "",
+  isResetOtpVerified: null,
   createAccount: false,
   partyId: "",
+  verifyResetEmail: "",
 };
 
 const userSlice = createSlice({
@@ -21,8 +22,8 @@ const userSlice = createSlice({
     setRegisterPayload: (state, action) => {
       state.registerPayload = action.payload;
     },
-    setOtp: (state, action) => {
-      state.otp = action.payload;
+    setIsResetOtpVerified: (state, action) => {
+      state.isResetOtpVerified = action.payload;
     },
     setCreateAccount: (state, action)=>{
       state.createAccount = action.payload;
@@ -30,10 +31,13 @@ const userSlice = createSlice({
     setPartyId: (state, action)=>{
       state.partyId = action.payload;
     },
+    setVerifyResetEmail: (state, action)=>{
+      state.verifyResetEmail= action.payload;
+    }
   },
 });
 
-export const { setUser, setRegisterPayload, setOtp, setCreateAccount, setPartyId } = userSlice.actions;
+export const { setUser, setRegisterPayload, setIsResetOtpVerified, setCreateAccount, setPartyId, setVerifyResetEmail } = userSlice.actions;
 
 const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,

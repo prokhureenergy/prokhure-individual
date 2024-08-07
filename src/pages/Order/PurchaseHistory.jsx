@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { OrderTable } from "./OrderTable";
-import { Search, ChevronDown } from "react-bootstrap-icons";
+import { ChevronDown } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
+import { RiSearch2Line } from "@remixicon/react";
 
 export const PurchaseHistory = () => {
   const [status, setStatus] = useState("All");
@@ -65,7 +66,7 @@ export const PurchaseHistory = () => {
               <div className="flex justify-end">
                 <div className="my-1 mx-2 h-[20px] text-xs flex items-center justify-center">
                   <form className="flex rounded-md bg-white border border-gray-200 shadow-sm">
-                    <Search
+                    <RiSearch2Line
                       className="absolute h-3 w-3 flex ml-2 my-2"
                       color="#D0D5DD"
                     />
