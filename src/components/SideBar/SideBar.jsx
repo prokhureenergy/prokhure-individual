@@ -12,7 +12,7 @@ import {
 
 export const SidebarList = [
   { title: "Account", icon: <RiUser6Line size={14} /> },
-  { title: "Subscription", icon: <RiExchangeDollarLine size={16} /> },
+  // { title: "Subscription", icon: <RiExchangeDollarLine size={16} /> },
   { title: "Category & Pricing", icon: <RiPriceTagLine size={14} /> },
   { title: "Wishlist", icon: <RiHeart3Line size={14} /> },
   { title: "Purchase History", icon: <RiTimeLine size={14} /> },

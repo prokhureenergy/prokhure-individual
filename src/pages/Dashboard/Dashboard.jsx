@@ -2,9 +2,7 @@ import { useState } from "react";
 import { NavBar } from "../../components/Shared/NavBar";
 import { Messages } from "../Messages/Messages";
 import { useSelector } from "react-redux";
-import {
-  ActiveItem,
-} from "../../components/SideBar/SideBar";
+import { ActiveItem } from "../../components/SideBar/SideBar";
 import { Support } from "../Support/Support";
 import { Account } from "../Account/Account";
 import { Category } from "../Category/Category";
@@ -15,14 +13,16 @@ import { RiSearch2Line } from "@remixicon/react";
 
 export const Dashboard = () => {
   const userData = useSelector((state) => state.userState.user?.userDetail);
-console.log(userData);
+  const tokenData = useSelector((state) => state.userState.user?.tokenDetail);
+  console.log(tokenData);
+  console.log(userData);
   const [active, setActive] = useState("Account");
 
   return (
     <>
       <div className="bg-white w-dvw h-screen">
         <div className="bg-white">
-        <NavBar value="dashboard"/>
+          <NavBar value="dashboard" />
         </div>
         <div className="grid grid-cols-7 gap-8 mx-32 mt-20">
           <div className="col-span-2 w-[300px]">
@@ -56,14 +56,13 @@ console.log(userData);
                           <>
                             {" "}
                             <div className="hover:text-blue-900 hover:cursor-auto">
-                            <div className="py-2 px-1 mx-12 flex text-sm">
-                              <div className="py-1 text-gray-600">
-                                {value.icon}
+                              <div className="py-2 px-1 mx-12 flex text-sm">
+                                <div className="py-1 text-gray-600">
+                                  {value.icon}
+                                </div>
+                                <p className="px-2 py-0.5 ">{value.title}</p>{" "}
                               </div>
-                              <p className="px-2 py-0.5 ">{value.title}</p>{" "}
                             </div>
-                            </div>
-                           
                           </>
                         )}
                       </li>
@@ -73,13 +72,19 @@ console.log(userData);
               </div>
             </>
           </div>
-          <div className={`mx-8 px-4 ${active === "Messages" || active ==="Purchase History" ? "w-[750px]" : "w-[550px]"}`}>
+          <div
+            className={`mx-8 px-4 ${
+              active === "Messages" || active === "Purchase History"
+                ? "w-[750px]"
+                : "w-[550px]"
+            }`}
+          >
             {active === "Account" && <Account />}
             {active === "Category & Pricing" && <Category />}
             {active === "Support" && <Support />}
-            {active === "Wishlist" && <Wishlist/>}
-            {active=== "Purchase History" && <PurchaseHistory/>}
-            {active ==="Messages" && <Messages/> }
+            {active === "Wishlist" && <Wishlist />}
+            {active === "Purchase History" && <PurchaseHistory />}
+            {active === "Messages" && <Messages />}
           </div>
         </div>
       </div>

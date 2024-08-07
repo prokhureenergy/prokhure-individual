@@ -81,19 +81,13 @@ export const NavBar = (props) => {
           <Link to="/signin">
             <div className="border border-[#0055FF] rounded-md p-1 flex justify-between">
               {" "}
-              <p className="text-[#0055FF] py-0.5"> Sign In</p>{" "}
-              <div className="p-1">
-                <RiArrowDownSLine size={14} />{" "}
-              </div>{" "}
+              <p className="text-[#0055FF] py-0.5 px-1"> Sign In</p>{" "}
             </div>
           </Link>
 
           <Link to="/signup">
             <div className="border border-[#0055FF] rounded-md p-1 flex justify-between mx-2">
-              <p className="text-[#0055FF] py-0.5"> Sign Up</p>{" "}
-              <div className="p-1">
-                <RiArrowDownSLine size={14} />{" "}
-              </div>{" "}
+              <p className="text-[#0055FF] py-0.5 px-1"> Sign Up</p>{" "}
             </div>
           </Link>
 

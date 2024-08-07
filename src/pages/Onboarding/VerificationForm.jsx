@@ -1,8 +1,4 @@
-import {
-  CheckCircleFill,
-  ExclamationCircleFill,
-  X,
-} from "react-bootstrap-icons";
+import { CheckCircleFill, X } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { NavBar } from "../../components/Shared/NavBar";
 import LoginFrame from "../../assets/images/Login Frame.svg";
@@ -11,6 +7,8 @@ import { useEffect, useState, useRef } from "react";
 import { useVerifyUserMutation } from "../../redux/user/userApi";
 import { useNavigate } from "react-router-dom";
 import { setIsResetOtpVerified } from "../../store/store";
+import { RiErrorWarningFill } from "@remixicon/react";
+import { LoadingSpinner } from "../../components/LoadingSpinner";
 
 export const VerificationForm = () => {
   const navigate = useNavigate();
@@ -87,6 +85,7 @@ export const VerificationForm = () => {
       navigate("/reset");
     }
   }, [data, error]);
+  
   return (
     <>
       <div className="h-screen">
@@ -106,7 +105,9 @@ export const VerificationForm = () => {
                     />
                   </div>
                   <div>
-                    <p className="text-lg font-semibold">Enter Verification Code</p>
+                    <p className="text-lg font-semibold">
+                      Enter Verification Code
+                    </p>
                     <p className="font-normal text-sm pb-5">
                       We’ve sent a code to {regPayload?.email}{" "}
                     </p>
@@ -132,11 +133,19 @@ export const VerificationForm = () => {
                         ))}
                       </div>
                       <button
-                        className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
+                        className="flex items-center justify-center my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
                         disabled={t.length !== 5}
                       >
-                        Verify Email
-                      </button>
+                        <p className="text-center">Verify Email</p>
+                        {isLoading && (
+                      <>
+                        {" "}
+                        <span className="px-3">
+                          {" "}
+                          <LoadingSpinner />{" "}
+                        </span>
+                      </>
+                    )}                      </button>
                     </form>
                     <div className="text-center mt-3">
                       <p>Experiencing issues receiving the code?</p>
@@ -192,8 +201,9 @@ export const VerificationForm = () => {
                       <>
                         <div className="p-2 my-5 rounded flex justify-between bg-slate-50 text-red-500">
                           <div className="flex">
-                            <div className="py-1.5">
-                              <ExclamationCircleFill />
+                            <div className="py-1">
+                              {" "}
+                              <RiErrorWarningFill size={14} />
                             </div>
                             <p className="p-1 font-light">
                               {error?.data?.errorDetails[0].message}

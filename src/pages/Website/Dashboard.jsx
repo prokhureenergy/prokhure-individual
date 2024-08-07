@@ -7,7 +7,6 @@ import product2 from "../../assets/images/Website/product2.svg";
 import product3 from "../../assets/images/Website/product3.svg";
 import product4 from "../../assets/images/Website/product4.svg";
 import product5 from "../../assets/images/Website/product5.svg";
-
 import { ProductCategory } from "../../components/Website/ProductCategory";
 import voucherImage from "../../assets/images/Website/VoucherImage.jpeg";
 import { Footer } from "../../components/Shared/Footer";
@@ -37,12 +36,25 @@ export const WebsiteDashboard = () => {
                 View all
               </button>
             </div>
-            <div className="my-5 col-span-3 py-1 relative bg-red-50">
+            <div className="col-span-3 bg-cover my-5 py-1 relative bg-gradient-to-r from-black to-gray-400 rounded-md">
               <img
                 src={Website1}
                 alt="WebsiteImage"
-                className="bg-cover h-[308px] rounded-md"
+                className="w-full h-[308px] object-cover absolute mix-blend-overlay rounded-md"
               />
+              <div className="text-[#FAFAFA] w-[340px] p-5 flex items-center justify-center mx-10 my-5 relative">
+                <div>
+                  <p className="text-3xl font-bold"> Super fast Performance</p>
+                  <p className="text-center text-sm font-light py-2">
+                    Strategic thinking is a valuable skill for everyone in an
+                    organisation, and it becomes more essential as
+                  </p>
+                  <button className="bg-[#0055FF] text-white p-2 rounded-md my-5">
+                  Shop Now
+                  </button>
+                  
+                </div>
+              </div>
             </div>
           </div>
 
@@ -148,26 +160,33 @@ export const WebsiteDashboard = () => {
 
             <div className="bg-[#F6F8FA] rounded-2xl h-[339px] flex justify-between">
               <div className="flex items-center justify-center pl-10">
-              <div className="p-5 w-[414px]">
-                <p className="font-semibold text-3xl">Up to 10% off Voucher</p>
-                <p className="py-4">
-                  {" "}
-                  Strategic thinking is a valuable skill for everyone in an
-                  organisation, and it becomes more essential as you ascend the
-                  ladder. In this practical course, professor and author
-                </p>
-                <button className="bg-[#0055FF] text-white p-1.5 rounded-md flex">
-                  <p>Sign Up</p>
-                  <RiArrowRightSLine/>
-                </button>
+                <div className="p-5 w-[414px]">
+                  <p className="font-semibold text-3xl">
+                    Up to 10% off Voucher
+                  </p>
+                  <p className="py-4">
+                    {" "}
+                    Strategic thinking is a valuable skill for everyone in an
+                    organisation, and it becomes more essential as you ascend
+                    the ladder. In this practical course, professor and author
+                  </p>
+                  <button className="bg-[#0055FF] text-white p-1.5 rounded-md flex">
+                    <p>Sign Up</p>
+                    <RiArrowRightSLine />
+                  </button>
+                </div>
               </div>
+
+              <div className="pr-10">
+                <img src={voucherImage} alt="water oil separator" />
               </div>
-              
-              <div className="pr-10"><img src={voucherImage} alt="water oil separator"/></div>
             </div>
 
             <div className="py-4">
-              <ProductCategory categoryTitle="Deals of the Day" categoryIcon="✨" />
+              <ProductCategory
+                categoryTitle="Deals of the Day"
+                categoryIcon="✨"
+              />
               <div className="grid grid-cols-5 gap-8 my-4">
                 <ProductItem
                   productImage={product1}
@@ -196,13 +215,11 @@ export const WebsiteDashboard = () => {
                 />
               </div>
             </div>
-
-
           </div>
         </div>
 
         <div>
-          <Footer/>
+          <Footer />
         </div>
       </div>
     </>

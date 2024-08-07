@@ -1,10 +1,8 @@
 import { useState } from "react";
-import {
-  ExclamationCircleFill,
-} from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import { setRegisterPayload } from "../../store/store";
 import { useDispatch } from "react-redux";
+import { RiErrorWarningFill } from "@remixicon/react";
 
 export const SignupForm = () => {
   const dispatch = useDispatch();
@@ -62,10 +60,10 @@ export const SignupForm = () => {
               className="peer border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8 invalid:border-red-600"
             ></input>
             <div className="invisible peer-invalid:visible text-red-500 text-xs flex">
-              <div className="py-0.5">
-                {" "}
-                <ExclamationCircleFill />
-              </div>{" "}
+            <div className="py-1">
+                    {" "}
+                    <RiErrorWarningFill size={14} />
+                  </div>
               <p className="px-1">Please provide a valid email address. </p>
             </div>
           </div>

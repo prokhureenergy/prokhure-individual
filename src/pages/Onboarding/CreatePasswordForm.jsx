@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  CheckCircleFill,
-  X,
-  XCircleFill,
-  ExclamationCircleFill,
-} from "react-bootstrap-icons";
+import { CheckCircleFill, X, XCircleFill } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   useRegisterUserMutation,
@@ -12,6 +7,8 @@ import {
 } from "../../redux/user/userApi";
 import { setCreateAccount, setPartyId } from "../../store/store";
 import { useNavigate } from "react-router-dom";
+import { RiErrorWarningFill, RiEyeLine, RiEyeOffLine } from "@remixicon/react";
+import { LoadingSpinner } from "../../components/LoadingSpinner";
 
 export const CreatePasswordForm = (props) => {
   const dispatch = useDispatch();
@@ -35,6 +32,17 @@ export const CreatePasswordForm = (props) => {
     password: "",
     confirmPassword: "",
   });
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(<RiEyeOffLine size={14} />);
+  const handlePasswordToggle = () => {
+    if (type === "password") {
+      setIcon(<RiEyeLine size={14} />);
+      setType("text");
+    } else {
+      setIcon(<RiEyeOffLine size={14} />);
+      setType("password");
+    }
+  };
   let passwordStrength = 0;
   const containsNumber = /\d/.test(passwordPayload.password);
   const containsCapital = /[A-Z]/.test(passwordPayload.password);
@@ -94,9 +102,9 @@ export const CreatePasswordForm = (props) => {
       console.log(error?.data?.errorDetails[0].message);
     } else if (data?.status === "00") {
       dispatch(setPartyId(data?.data?.partyId));
-    } else if(resetIsError){
+    } else if (resetIsError) {
       console.log(resetError?.data?.errorDetails[0].message);
-    }else if(resetData?.status ==="00"){
+    } else if (resetData?.status === "00") {
       navigate("/signin");
     }
   }, [data, error]);
@@ -112,36 +120,41 @@ export const CreatePasswordForm = (props) => {
           onSubmit={props.value === "reset" ? handleResetSubmit : handleSubmit}
         >
           <div className="my-1">
-            <label className="font-medium">
-              Create a Password
-            </label>
-            <input
-              type="password"
-              placeholder=""
-              name="password"
-              value={passwordPayload.password}
-              onChange={handleChange}
-              className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
-            ></input>
+            <label className="font-medium">Create a Password</label>
+            <div className="flex">
+              <input
+                type={type}
+                placeholder=""
+                name="password"
+                value={passwordPayload.password}
+                onChange={handleChange}
+                className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
+              />
+              <span
+                className="absolute my-3 ml-64 pl-4"
+                onClick={handlePasswordToggle}
+              >
+                <p className="flex justify-end">{icon} </p>
+              </span>
+            </div>
           </div>
           <div className="my-2">
-            <label className="font-medium">
-              Confirm Password
-            </label>
+            <label className="font-medium">Confirm Password</label>
             <input
-              type="password"
+              type={type}
               placeholder=""
               name="confirmPassword"
               value={passwordPayload.confirmPassword}
               onChange={handleChange}
               className="border border-slate-300 focus:outline-none focus:border-slate-200 rounded-md shadow-xs my-1 p-2 w-full h-8"
-            ></input>
+            />
+
             {!confirmPasswordStatus && (
               <>
                 <div className="flex py-0.5 text-red-500">
-                  <div className="py-0.5">
+                  <div className="py-1">
                     {" "}
-                    <ExclamationCircleFill />
+                    <RiErrorWarningFill size={14} />
                   </div>
                   <p className="px-0.5">Passwords do not match</p>
                 </div>
@@ -219,10 +232,19 @@ export const CreatePasswordForm = (props) => {
             </div>
           </div>
           <button
-            className="my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
+            className="flex items-center justify-center my-2 p-1.5 rounded-md bg-[#2A4DA0] text-white disabled:bg-[#F6F8FA] disabled:text-slate-300 w-full shadow-sm text-sm"
             disabled={passwordStrength !== 3 || !confirmPasswordStatus}
           >
-            Create Password
+            <p className="text-center">Create Password</p>
+            {isLoading || resetIsLoading && (
+              <>
+                {" "}
+                <span className="px-3">
+                  {" "}
+                  <LoadingSpinner />{" "}
+                </span>
+              </>
+            )}{" "}
           </button>
         </form>
 
