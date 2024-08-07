@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { RiArrowDownSLine, RiNotification3Line, RiQuestionLine, RiSearch2Line, RiShoppingCartLine } from "@remixicon/react";
 
 export const NavBar = (props) => {
-  //const user = "Johnson";
+  const user = useSelector((state) => state.userState.user?.userDetail);
+  const userName =user?.name?.split(' ')[0];
   const toggleDropdown = (e) => {
     var elem = document.querySelector("#dropdownButton #dropdown");
     elem.classList.toggle("hidden");
@@ -22,7 +23,7 @@ export const NavBar = (props) => {
           <div className="px-2 relative select-none" id="dropdownButton">
             <div onClick={toggleDropdown}>
               <div className="text-xs font-semibold border border-gray-200 shadow-sm rounded-md px-3 py-2 flex items-center justify-center">
-                Hi Johnson
+                Hi {userName}
                 <div className="p-1 pl-2">
                   <RiArrowDownSLine size={14}/>
                 </div>

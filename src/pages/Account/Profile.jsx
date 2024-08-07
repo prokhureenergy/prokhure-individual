@@ -28,6 +28,7 @@ export const Profile = () => {
               name="emailAddress"
               className="bg-slate-100 rounded-md p-1 my-1 w-full h-10 px-3"
               value={userData.email}
+              disabled
             />
           </div>
           <div className="py-3">
