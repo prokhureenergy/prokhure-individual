@@ -51,7 +51,7 @@ export const ResetPassword = () => {
   console.log(isEmailValid);
   return (
     <>
-      <div className="h-screen">
+      <div className="h-screen font-prokhure">
         <div className="bg-white">
           <NavBar />
         </div>

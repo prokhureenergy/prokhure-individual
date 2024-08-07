@@ -57,7 +57,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className="h-screen bg-gradient-to-tr from-pink-100 from-10% via-white via-60% to-emerald-100 to-90%">
+      <div className="font-prokhure h-screen bg-gradient-to-tr from-pink-100 from-10% via-white via-60% to-emerald-100 to-90%">
         <NavBar />
         <div className="flex justify-center items-center">
           <div className="flex justify-center items-center mt-14 pt-8 w-[400px] rounded-lg pb-4 bg-white border border-slate-200">

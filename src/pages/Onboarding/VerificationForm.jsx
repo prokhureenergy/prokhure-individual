@@ -88,7 +88,7 @@ export const VerificationForm = () => {
   
   return (
     <>
-      <div className="h-screen">
+      <div className="font-prokhure h-screen">
         <div className="bg-white">
           <NavBar />
         </div>

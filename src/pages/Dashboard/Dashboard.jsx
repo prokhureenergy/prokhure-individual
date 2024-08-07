@@ -20,7 +20,7 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div className="bg-white w-dvw h-screen">
+      <div className="bg-white w-dvw h-screen font-prokhure">
         <div className="bg-white">
           <NavBar value="dashboard" />
         </div>

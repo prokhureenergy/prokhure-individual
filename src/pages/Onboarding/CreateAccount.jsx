@@ -39,7 +39,7 @@ export const CreateAccount = () => {
   }
   return (
     <>
-    <div className="bg-white h-screen">
+    <div className="bg-white h-screen font-prokhure">
       <div>
       <NavBar />
       </div>  
