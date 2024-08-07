@@ -1,6 +1,12 @@
 import { RiShoppingCartLine } from "@remixicon/react";
+import { useNavigate } from "react-router-dom";
 
 export const ProductItem = (props) => {
+  const navigate = useNavigate();
+
+  const handleProduct=()=>{
+    navigate("/product");
+  }
   return (
     <>
       <div className="text-sm">
@@ -15,7 +21,7 @@ export const ProductItem = (props) => {
           </div>
         </div>
         <div>
-          <p className="font-semibold leading-5">{props.productName} </p>
+          <button className="font-semibold leading-5 text-left" onClick={handleProduct}>{props.productName} </button>
           <p className="py-1">{props.productAmount}</p>
         </div>
       </div>

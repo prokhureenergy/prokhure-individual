@@ -1,5 +1,6 @@
 import logo from "../../assets/icon/Prokhure.svg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { RiArrowDownSLine, RiNotification3Line, RiQuestionLine, RiSearch2Line, RiShoppingCartLine } from "@remixicon/react";
 
 export const NavBar = (props) => {

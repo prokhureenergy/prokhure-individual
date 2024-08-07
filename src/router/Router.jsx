@@ -6,6 +6,9 @@ import { ResetPassword } from "../pages/Onboarding/ResetPassword";
 import { VerificationForm } from "../pages/Onboarding/VerificationForm";
 import { WebsiteDashboard } from "../pages/Website/Dashboard";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { Product } from "../pages/Website/Product";
+import { Cart } from "../pages/Cart/Cart";
+
 const router = createBrowserRouter([
   { path: "/", element: <WebsiteDashboard /> },
   {
@@ -20,5 +23,7 @@ const router = createBrowserRouter([
   { path: "/signin", element: <Login /> },
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerificationForm /> },
+  {path: "/product", element: <Product/>},
+  {path: "/cart", element:<Cart/>}
 ]);
 export default router;

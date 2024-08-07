@@ -1,6 +1,6 @@
 import { NavBar } from "../../components/Shared/NavBar";
 import Website1 from "../../assets/images/Website/Website1.svg";
-import { RiArrowRightSLine, RiStarFill } from "@remixicon/react";
+import {RiStarFill } from "@remixicon/react";
 import { ProductItem } from "../../components/Website/ProductItem";
 import product1 from "../../assets/images/Website/product1.svg";
 import product2 from "../../assets/images/Website/product2.svg";
