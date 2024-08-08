@@ -6,8 +6,6 @@ import {
   RiTwitterXLine,
 } from "@remixicon/react";
 import Website1 from "../../assets/images/Website/Website1.svg";
-import { Footer } from "../../components/Shared/Footer";
-import { NavBar } from "../../components/Shared/NavBar";
 import { QuantityCounter } from "../../components/Website/CounterReducer";
 import { StarRating } from "../../components/Website/StarRating";
 import product1 from "../../assets/images/Website/product1.svg";
@@ -19,23 +17,23 @@ import { ProductItem } from "../../components/Website/ProductItem";
 import { ProductCategory } from "../../components/Website/ProductCategory";
 import PaymentChannel from "../../assets/images/Website/PaymentChannel.svg";
 import { useState } from "react";
-import { Description, Review, Specification } from "../../components/Website/ProductDetails";
+import {
+  Description,
+  Review,
+  Specification,
+} from "../../components/Website/ProductDetails";
 
 export const Product = () => {
-    const [active, setActive] = useState("Description");
+  const [active, setActive] = useState("Description");
   return (
     <>
-      <div className="bg-[#F6F8FA] h-screen font-prokhure">
-        <div className="bg-white">
-          <NavBar value="website" />
-        </div>
-        <div className="flex h-[500px] mx-10 mt-10">
+      <div className="bg-[#F6F8FA] py-5">
+        <div className="flex h-[500px] mx-10">
           <div className="basis-1/2">
             {" "}
-            <div>
+            <div className="w-[550px]">
               <img src={Website1} alt="product" className="h-[400px]" />{" "}
-            </div>
-            <div className="flex gap-2 items-center justify-center my-2">
+              <div className="flex gap-2 items-center justify-center my-2">
               <div>
                 <img
                   src={Website1}
@@ -58,6 +56,8 @@ export const Product = () => {
                 />{" "}
               </div>
             </div>
+            </div>
+           
           </div>
           <div className="basis-1/2 mx-6 mt-6 px-5">
             <div>
@@ -114,16 +114,37 @@ export const Product = () => {
         <div className="bg-white border-y">
           <div className="mx-10">
             <div className="flex justify-center items-center gap-4">
-            <button onClick={()=>setActive("Description")} className={`p-4 ${active === "Description" && " border-b-2 border-[#0C3BAC]"}`}>Description</button>
+              <button
+                onClick={() => setActive("Description")}
+                className={`p-4 ${
+                  active === "Description" && " border-b-2 border-[#0C3BAC]"
+                }`}
+              >
+                Description
+              </button>
 
-            <button onClick={()=>setActive("Specification")} className={`p-4 ${active === "Specification" && " border-b-2 border-[#0C3BAC]"}`}>Specification</button>
-            <button onClick={()=>setActive("Reviews")} className={`p-4 ${active === "Reviews" && " border-b-2 border-[#0C3BAC]"}`}>Reviews</button>
+              <button
+                onClick={() => setActive("Specification")}
+                className={`p-4 ${
+                  active === "Specification" && " border-b-2 border-[#0C3BAC]"
+                }`}
+              >
+                Specification
+              </button>
+              <button
+                onClick={() => setActive("Reviews")}
+                className={`p-4 ${
+                  active === "Reviews" && " border-b-2 border-[#0C3BAC]"
+                }`}
+              >
+                Reviews
+              </button>
             </div>
-<div className="my-5">
-{active ==="Description" && <Description/>}
-{active === "Specification" && <Specification/>}
-{active === "Reviews" && <Review/>}
-</div>
+            <div className="my-5">
+              {active === "Description" && <Description />}
+              {active === "Specification" && <Specification />}
+              {active === "Reviews" && <Review />}
+            </div>
           </div>
         </div>
 
@@ -158,9 +179,6 @@ export const Product = () => {
               />
             </div>
           </div>
-        </div>
-        <div>
-          <Footer />
         </div>
       </div>
     </>

@@ -1,4 +1,3 @@
-import { NavBar } from "../../components/Shared/NavBar";
 import Website1 from "../../assets/images/Website/Website1.svg";
 import {RiStarFill } from "@remixicon/react";
 import { ProductItem } from "../../components/Website/ProductItem";
@@ -9,7 +8,6 @@ import product4 from "../../assets/images/Website/product4.svg";
 import product5 from "../../assets/images/Website/product5.svg";
 import { ProductCategory } from "../../components/Website/ProductCategory";
 import voucherImage from "../../assets/images/Website/VoucherImage.jpeg";
-import { Footer } from "../../components/Shared/Footer";
 import { useNavigate } from "react-router-dom";
 
 export const WebsiteDashboard = () => {
@@ -19,12 +17,10 @@ navigate("/signup");
   }
   return (
     <>
-      <div className="bg-[#F6F8FA] h-screen font-prokhure">
-        <div className="bg-white">
-          <NavBar value="website" />
-        </div>
+      <div className="bg-[#F6F8FA]">
+      
         <div>
-          <div className="grid grid-cols-4 gap-4 mx-10 my-5 h-[308px]">
+          <div className="grid grid-cols-4 gap-4 mx-10 mb-5 h-[308px]">
             <div className="bg-white border border-slate-200 rounded-md p-4 my-5">
               <p className="font-semibold pb-2">Product Categories</p>
               <hr />
@@ -222,9 +218,6 @@ navigate("/signup");
           </div>
         </div>
 
-        <div>
-          <Footer />
-        </div>
       </div>
     </>
   );

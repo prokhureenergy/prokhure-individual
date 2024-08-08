@@ -7,10 +7,28 @@ import { VerificationForm } from "../pages/Onboarding/VerificationForm";
 import { WebsiteDashboard } from "../pages/Website/Dashboard";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { Product } from "../pages/Website/Product";
-import { Cart } from "../pages/Cart/Cart";
+import { Cart } from "../pages/Website/Cart";
+import { WebsiteSharedLayout } from "../components/Shared/WebsiteSharedLayout";
+import { OrderSuccess } from "../components/Website/OrderSuccess";
+import { Checkout } from "../pages/Website/Checkout";
 
 const router = createBrowserRouter([
-  { path: "/", element: <WebsiteDashboard /> },
+  {
+    path: "/",
+    element: <WebsiteSharedLayout />,
+
+    children: [
+      {
+        path: "/",
+        element: <WebsiteDashboard />,
+      },
+      { path: "/product", element: <Product /> },
+      { path: "/cart", element: <Cart /> },
+      { path: "/success", element: <OrderSuccess /> },
+      { path: "/checkout", element: <Checkout /> },
+    ],
+  },
+  
   {
     path: "/dashboard",
     element: (
@@ -23,7 +41,5 @@ const router = createBrowserRouter([
   { path: "/signin", element: <Login /> },
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerificationForm /> },
-  {path: "/product", element: <Product/>},
-  {path: "/cart", element:<Cart/>}
 ]);
 export default router;
