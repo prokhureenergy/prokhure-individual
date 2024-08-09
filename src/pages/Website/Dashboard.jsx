@@ -50,7 +50,7 @@ navigate("/signup");
                     Strategic thinking is a valuable skill for everyone in an
                     organisation, and it becomes more essential as
                   </p>
-                  <button className="bg-[#0055FF] text-white p-2 rounded-md my-5">
+                  <button className="bg-[#0055FF] text-white p-2 rounded-md my-5" onClick={()=>navigate("/shop")}>
                   Shop Now
                   </button>
                   

@@ -11,6 +11,7 @@ import { Cart } from "../pages/Website/Cart";
 import { WebsiteSharedLayout } from "../components/Shared/WebsiteSharedLayout";
 import { OrderSuccess } from "../components/Website/OrderSuccess";
 import { Checkout } from "../pages/Website/Checkout";
+import { Shop } from "../pages/Website/Shop";
 
 const router = createBrowserRouter([
   {
@@ -26,9 +27,10 @@ const router = createBrowserRouter([
       { path: "/cart", element: <Cart /> },
       { path: "/success", element: <OrderSuccess /> },
       { path: "/checkout", element: <Checkout /> },
+      {path: "/shop", element: <Shop/>}
     ],
   },
-  
+
   {
     path: "/dashboard",
     element: (
