@@ -10,6 +10,7 @@ const initialState = {
   createAccount: false,
   partyId: "",
   verifyResetEmail: "",
+  isOpenPaymentModal: false,
 };
 
 const userSlice = createSlice({
@@ -33,11 +34,18 @@ const userSlice = createSlice({
     },
     setVerifyResetEmail: (state, action)=>{
       state.verifyResetEmail= action.payload;
-    }
-  },
-});
+    },
 
-export const { setUser, setRegisterPayload, setIsResetOtpVerified, setCreateAccount, setPartyId, setVerifyResetEmail } = userSlice.actions;
+    togglePaymentModal: (state) => {
+      console.log("opening modal")
+			state.isOpenPaymentModal = !state.isOpenPaymentModal;
+		},
+
+    },
+  },
+);
+
+export const { setUser, setRegisterPayload, setIsResetOtpVerified, setCreateAccount, setPartyId, setVerifyResetEmail, togglePaymentModal } = userSlice.actions;
 
 const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
